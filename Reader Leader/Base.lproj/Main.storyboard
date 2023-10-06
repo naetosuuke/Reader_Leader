@@ -1,24 +1,211 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zRk-SI-agZ">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Ieb-Ws-9G4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="970" y="-35"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="WD7-8v-qTQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zRk-SI-agZ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4Ph-6p-ycb">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="zQq-cv-AQ8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ow0-sK-CO8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="130.53435114503816" y="-34.507042253521128"/>
+        </scene>
+        <!--Registration View Controller-->
+        <scene sceneID="XfY-3G-20h">
+            <objects>
+                <viewController id="5T5-ez-zFz" customClass="RegistrationViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bdJ-kH-Noy">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="41o-t1-Czm"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="YVB-y2-Qle"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2tx-0I-Sdm" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="969" y="695"/>
+        </scene>
+        <!--SelectRSS Channel View Controller-->
+        <scene sceneID="F3M-BR-5sQ">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4t8-Jw-pp1" sceneMemberID="firstResponder"/>
+                <viewController id="lKo-Sf-mJy" customClass="SelectRSSChannelViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0xM-KS-i8r">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="7Er-vi-3rN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="qzM-ZY-PNb"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1831" y="694"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="rry-cn-p7V">
+            <objects>
+                <viewController id="HDF-36-UV2" customClass="ViewController" customModule="Reader_Leader" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9f7-QN-DlJ">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Xds-7s-poU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="2m7-SO-4vf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="exo-dY-QDb" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1831" y="694"/>
+        </scene>
+        <!--List Table View Controller-->
+        <scene sceneID="kXA-is-lw8">
+            <objects>
+                <viewController id="TGb-go-j9F" customClass="RSSListTableViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MbR-kL-VIw">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="XWf-18-4iA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="uay-eX-sZ4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mZH-Ee-z1s" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2656" y="694"/>
+        </scene>
+        <!--Preference View Controller-->
+        <scene sceneID="cmc-Hc-Ady">
+            <objects>
+                <viewController id="Va3-aF-Ee5" customClass="PreferenceViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JOt-m4-4D1">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="aSc-Lj-GE3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="XF8-UU-Jau"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="avv-a6-pW4" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2656" y="-23"/>
+        </scene>
+        <!--Preference Sub View-->
+        <scene sceneID="hby-BP-SWA">
+            <objects>
+                <viewController id="CB1-35-itk" customClass="PreferenceSubView" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iCz-T8-Fqb">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="5bk-CU-xyE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="0Qj-El-IyF"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="48w-i5-2lQ" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3543" y="-23"/>
+        </scene>
+        <!--Article View Controller-->
+        <scene sceneID="Uvp-tz-1rs">
+            <objects>
+                <viewController id="76N-FV-7fi" customClass="ArticleViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3ws-td-zA6">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="2F8-F0-OBp"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ZT0-1N-oBn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yc9-Rb-ni2" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3543" y="694"/>
+        </scene>
+        <!--Collection View Controller-->
+        <scene sceneID="PZW-aB-XOY">
+            <objects>
+                <viewController id="M9A-jr-yt7" customClass="RSSCollectionViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cv2-on-yPm">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="4pq-m7-rnA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="HBI-Yf-CrA"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ttz-74-lp4" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2671" y="1374"/>
+        </scene>
+        <!--List Side View Controller-->
+        <scene sceneID="Rzf-Ko-fuf">
+            <objects>
+                <viewController id="CEz-ko-ao6" customClass="RSSListSideViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9Ou-yW-gvV">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="3wx-TP-5gy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="05u-Hg-Jxn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sMQ-5n-TyJ" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1830" y="1374"/>
+        </scene>
+        <!--ManageRSS Channel View Controller-->
+        <scene sceneID="x8t-DE-hZc">
+            <objects>
+                <viewController id="saZ-lf-V7g" customClass="ManageRSSChannelViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bak-MC-eGk">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="5Y8-1R-fnd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="osc-6a-uGU"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Old-s8-SCB" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3543" y="-770"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
