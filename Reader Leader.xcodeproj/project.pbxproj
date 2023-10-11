@@ -7,23 +7,51 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		506EC0262AD04F3100AF08C5 /* CustomCellForSelectRSSTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 506EC0252AD04F3100AF08C5 /* CustomCellForSelectRSSTableView.xib */; };
+		506EC0312AD38D5600AF08C5 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506EC0302AD38D5600AF08C5 /* NavigationController.swift */; };
+		5093F1732AD0432B002BE727 /* CustomCellForRSSListSideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5093F1722AD0432B002BE727 /* CustomCellForRSSListSideView.xib */; };
+		50949FE42AD54DE900AF30E4 /* CustomCellForRSSListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50949FE32AD54DE900AF30E4 /* CustomCellForRSSListTableView.swift */; };
+		50A7C9EC2AD042D100BB3B9B /* CustomCellForRSSListTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50A7C9EB2AD042D100BB3B9B /* CustomCellForRSSListTableView.xib */; };
 		50F192882ACC6A3300999CDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F192872ACC6A3300999CDC /* AppDelegate.swift */; };
 		50F1928A2ACC6A3300999CDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F192892ACC6A3300999CDC /* SceneDelegate.swift */; };
-		50F1928C2ACC6A3300999CDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F1928B2ACC6A3300999CDC /* ViewController.swift */; };
+		50F1928C2ACC6A3300999CDC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F1928B2ACC6A3300999CDC /* LoginViewController.swift */; };
 		50F1928F2ACC6A3300999CDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50F1928D2ACC6A3300999CDC /* Main.storyboard */; };
-		50F192912ACC6A3300999CDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50F192902ACC6A3300999CDC /* Assets.xcassets */; };
+		50F192912ACC6A3300999CDC /* 仮.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 50F192902ACC6A3300999CDC /* 仮.jpg */; };
 		50F192942ACC6A3300999CDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50F192922ACC6A3300999CDC /* LaunchScreen.storyboard */; };
+		50F1929E2AD0409300999CDC /* SelectRSSChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F1929D2AD0409300999CDC /* SelectRSSChannelViewController.swift */; };
+		50F192A02AD040BF00999CDC /* RSSListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F1929F2AD040BF00999CDC /* RSSListTableViewController.swift */; };
+		50F192A22AD040DE00999CDC /* RSSCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F192A12AD040DE00999CDC /* RSSCollectionViewController.swift */; };
+		50F192A42AD040F100999CDC /* RSSListSideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F192A32AD040F100999CDC /* RSSListSideViewController.swift */; };
+		50F192A62AD0412600999CDC /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F192A52AD0412600999CDC /* ArticleViewController.swift */; };
+		50F192A82AD0414500999CDC /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F192A72AD0414500999CDC /* PreferenceViewController.swift */; };
+		50F192AA2AD0419400999CDC /* PreferenceSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F192A92AD0419400999CDC /* PreferenceSubViewController.swift */; };
+		50F192AC2AD041AF00999CDC /* ManageRSSChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F192AB2AD041AF00999CDC /* ManageRSSChannelViewController.swift */; };
+		50F192B02AD0422000999CDC /* CustomCellForRSSListCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50F192AF2AD0422000999CDC /* CustomCellForRSSListCollectionView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		506EC0252AD04F3100AF08C5 /* CustomCellForSelectRSSTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CustomCellForSelectRSSTableView.xib; path = ../CustomCellForSelectRSSTableView.xib; sourceTree = "<group>"; };
+		506EC0302AD38D5600AF08C5 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		5093F1722AD0432B002BE727 /* CustomCellForRSSListSideView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCellForRSSListSideView.xib; sourceTree = "<group>"; };
+		50949FE32AD54DE900AF30E4 /* CustomCellForRSSListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellForRSSListTableView.swift; sourceTree = "<group>"; };
+		50A7C9EB2AD042D100BB3B9B /* CustomCellForRSSListTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCellForRSSListTableView.xib; sourceTree = "<group>"; };
 		50F192842ACC6A3300999CDC /* Reader Leader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reader Leader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50F192872ACC6A3300999CDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50F192892ACC6A3300999CDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		50F1928B2ACC6A3300999CDC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		50F1928B2ACC6A3300999CDC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		50F1928E2ACC6A3300999CDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		50F192902ACC6A3300999CDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		50F192902ACC6A3300999CDC /* 仮.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "仮.jpg"; path = "Assets.xcassets/仮.imageset/仮.jpg"; sourceTree = "<group>"; };
 		50F192932ACC6A3300999CDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		50F192952ACC6A3300999CDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		50F1929D2AD0409300999CDC /* SelectRSSChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRSSChannelViewController.swift; sourceTree = "<group>"; };
+		50F1929F2AD040BF00999CDC /* RSSListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSListTableViewController.swift; sourceTree = "<group>"; };
+		50F192A12AD040DE00999CDC /* RSSCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSCollectionViewController.swift; sourceTree = "<group>"; };
+		50F192A32AD040F100999CDC /* RSSListSideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSListSideViewController.swift; sourceTree = "<group>"; };
+		50F192A52AD0412600999CDC /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
+		50F192A72AD0414500999CDC /* PreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceViewController.swift; sourceTree = "<group>"; };
+		50F192A92AD0419400999CDC /* PreferenceSubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceSubViewController.swift; sourceTree = "<group>"; };
+		50F192AB2AD041AF00999CDC /* ManageRSSChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageRSSChannelViewController.swift; sourceTree = "<group>"; };
+		50F192AF2AD0422000999CDC /* CustomCellForRSSListCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCellForRSSListCollectionView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +65,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5093F1762AD043A4002BE727 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				50F192922ACC6A3300999CDC /* LaunchScreen.storyboard */,
+				50F1928D2ACC6A3300999CDC /* Main.storyboard */,
+				5093F1782AD043DD002BE727 /* CustomCells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5093F1772AD043B3002BE727 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				50F1929F2AD040BF00999CDC /* RSSListTableViewController.swift */,
+				50F192A12AD040DE00999CDC /* RSSCollectionViewController.swift */,
+				50F192A72AD0414500999CDC /* PreferenceViewController.swift */,
+				50F192A32AD040F100999CDC /* RSSListSideViewController.swift */,
+				50F192A52AD0412600999CDC /* ArticleViewController.swift */,
+				50F192AB2AD041AF00999CDC /* ManageRSSChannelViewController.swift */,
+				50F1928B2ACC6A3300999CDC /* LoginViewController.swift */,
+				50F1929D2AD0409300999CDC /* SelectRSSChannelViewController.swift */,
+				506EC0302AD38D5600AF08C5 /* NavigationController.swift */,
+				50F192A92AD0419400999CDC /* PreferenceSubViewController.swift */,
+				50949FE52AD54DEF00AF30E4 /* CustomCells */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		5093F1782AD043DD002BE727 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				50A7C9EB2AD042D100BB3B9B /* CustomCellForRSSListTableView.xib */,
+				5093F1722AD0432B002BE727 /* CustomCellForRSSListSideView.xib */,
+				506EC0252AD04F3100AF08C5 /* CustomCellForSelectRSSTableView.xib */,
+				50F192AF2AD0422000999CDC /* CustomCellForRSSListCollectionView.xib */,
+			);
+			path = CustomCells;
+			sourceTree = "<group>";
+		};
+		50949FE52AD54DEF00AF30E4 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				50949FE32AD54DE900AF30E4 /* CustomCellForRSSListTableView.swift */,
+			);
+			path = CustomCells;
+			sourceTree = "<group>";
+		};
 		50F1927B2ACC6A3200999CDC = {
 			isa = PBXGroup;
 			children = (
@@ -56,12 +131,11 @@
 		50F192862ACC6A3300999CDC /* Reader Leader */ = {
 			isa = PBXGroup;
 			children = (
+				5093F1772AD043B3002BE727 /* Controllers */,
+				5093F1762AD043A4002BE727 /* Views */,
+				50F192902ACC6A3300999CDC /* 仮.jpg */,
 				50F192872ACC6A3300999CDC /* AppDelegate.swift */,
 				50F192892ACC6A3300999CDC /* SceneDelegate.swift */,
-				50F1928B2ACC6A3300999CDC /* ViewController.swift */,
-				50F1928D2ACC6A3300999CDC /* Main.storyboard */,
-				50F192902ACC6A3300999CDC /* Assets.xcassets */,
-				50F192922ACC6A3300999CDC /* LaunchScreen.storyboard */,
 				50F192952ACC6A3300999CDC /* Info.plist */,
 			);
 			path = "Reader Leader";
@@ -126,7 +200,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				50F192942ACC6A3300999CDC /* LaunchScreen.storyboard in Resources */,
-				50F192912ACC6A3300999CDC /* Assets.xcassets in Resources */,
+				50A7C9EC2AD042D100BB3B9B /* CustomCellForRSSListTableView.xib in Resources */,
+				50F192B02AD0422000999CDC /* CustomCellForRSSListCollectionView.xib in Resources */,
+				5093F1732AD0432B002BE727 /* CustomCellForRSSListSideView.xib in Resources */,
+				50F192912ACC6A3300999CDC /* 仮.jpg in Resources */,
+				506EC0262AD04F3100AF08C5 /* CustomCellForSelectRSSTableView.xib in Resources */,
 				50F1928F2ACC6A3300999CDC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,9 +216,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50F1928C2ACC6A3300999CDC /* ViewController.swift in Sources */,
+				50F1928C2ACC6A3300999CDC /* LoginViewController.swift in Sources */,
+				506EC0312AD38D5600AF08C5 /* NavigationController.swift in Sources */,
+				50949FE42AD54DE900AF30E4 /* CustomCellForRSSListTableView.swift in Sources */,
 				50F192882ACC6A3300999CDC /* AppDelegate.swift in Sources */,
+				50F192A42AD040F100999CDC /* RSSListSideViewController.swift in Sources */,
+				50F192A62AD0412600999CDC /* ArticleViewController.swift in Sources */,
+				50F192AA2AD0419400999CDC /* PreferenceSubViewController.swift in Sources */,
+				50F192A82AD0414500999CDC /* PreferenceViewController.swift in Sources */,
 				50F1928A2ACC6A3300999CDC /* SceneDelegate.swift in Sources */,
+				50F192AC2AD041AF00999CDC /* ManageRSSChannelViewController.swift in Sources */,
+				50F192A22AD040DE00999CDC /* RSSCollectionViewController.swift in Sources */,
+				50F192A02AD040BF00999CDC /* RSSListTableViewController.swift in Sources */,
+				50F1929E2AD0409300999CDC /* SelectRSSChannelViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

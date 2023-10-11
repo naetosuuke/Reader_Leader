@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomCellForRSSListTableView" rowHeight="85" id="qDP-Lk-6wM" customClass="CustomCellForRSSListTableView" customModule="Reader_Leader" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="396" height="85"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qDP-Lk-6wM" id="pAu-KG-RNu">
+                <rect key="frame" x="0.0" y="0.0" width="396" height="85"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="仮.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4PY-ZI-I7v">
+                        <rect key="frame" x="10" y="10" width="65" height="65"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="65" id="Bz7-Xg-Fxh"/>
+                            <constraint firstAttribute="height" constant="65" id="PZk-Fo-NrW"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="仮データ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJt-YW-24E">
+                        <rect key="frame" x="105" y="10" width="281" height="65"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="nJt-YW-24E" firstAttribute="top" secondItem="pAu-KG-RNu" secondAttribute="top" constant="10" id="0ES-pf-5kd"/>
+                    <constraint firstAttribute="bottom" secondItem="4PY-ZI-I7v" secondAttribute="bottom" constant="10" id="0Rz-gV-T50"/>
+                    <constraint firstItem="4PY-ZI-I7v" firstAttribute="top" secondItem="pAu-KG-RNu" secondAttribute="top" constant="10" id="8L3-9h-vBg"/>
+                    <constraint firstItem="nJt-YW-24E" firstAttribute="leading" secondItem="4PY-ZI-I7v" secondAttribute="trailing" constant="30" id="Nf5-t1-BiR"/>
+                    <constraint firstAttribute="trailing" secondItem="nJt-YW-24E" secondAttribute="trailing" constant="10" id="gBa-31-lQE"/>
+                    <constraint firstAttribute="bottom" secondItem="nJt-YW-24E" secondAttribute="bottom" constant="10" id="tV7-q4-NdI"/>
+                    <constraint firstItem="4PY-ZI-I7v" firstAttribute="leading" secondItem="pAu-KG-RNu" secondAttribute="leading" constant="10" id="vGd-J2-Zvp"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="iconImageView" destination="4PY-ZI-I7v" id="k7B-gh-ASo"/>
+                <outlet property="nameLabel" destination="nJt-YW-24E" id="02V-CR-JwE"/>
+            </connections>
+            <point key="canvasLocation" x="303.81679389312978" y="-15.140845070422536"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="仮.jpg" width="388.79998779296875" height="259.20001220703125"/>
+    </resources>
+</document>
