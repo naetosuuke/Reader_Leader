@@ -10,11 +10,8 @@ import UIKit
 class LoginViewController: UIViewController {
 
     @IBOutlet weak var emailInputField: UITextField!
-    
     @IBOutlet weak var passwordInputField: UITextField!
-    
     @IBOutlet weak var loginButton: UIButton!
-    
     @IBOutlet weak var signUpButton: UIButton!
     
     

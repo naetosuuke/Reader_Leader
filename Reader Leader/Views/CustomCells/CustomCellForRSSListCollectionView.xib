@@ -3,21 +3,68 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="l7J-9a-dnW">
-            <rect key="frame" x="0.0" y="0.0" width="138" height="137"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CustomCellForRSSListCollectionView" id="l7J-9a-dnW" customClass="CustomCellForRSSListCollectionView" customModule="Reader_Leader" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="236" height="401"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="NnP-Le-qEK">
-                <rect key="frame" x="0.0" y="0.0" width="138" height="137"/>
+                <rect key="frame" x="0.0" y="0.0" width="236" height="401"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZpX-Y0-wBf">
+                        <rect key="frame" x="0.0" y="0.0" width="236" height="401"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="仮.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="tlq-KI-Ab7">
+                                <rect key="frame" x="10" y="10" width="216" height="201"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="仮データ" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnd-yd-7Bf">
+                                <rect key="frame" x="10" y="221" width="216" height="170"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="170" id="tfC-rT-FYc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="lnd-yd-7Bf" secondAttribute="bottom" constant="10" id="0Dk-zp-4XQ"/>
+                            <constraint firstItem="tlq-KI-Ab7" firstAttribute="leading" secondItem="lnd-yd-7Bf" secondAttribute="leading" id="8F7-De-VLC"/>
+                            <constraint firstItem="tlq-KI-Ab7" firstAttribute="centerX" secondItem="ZpX-Y0-wBf" secondAttribute="centerX" id="8pe-e4-cI8"/>
+                            <constraint firstItem="tlq-KI-Ab7" firstAttribute="leading" secondItem="ZpX-Y0-wBf" secondAttribute="leading" constant="10" id="PIl-CK-NeG"/>
+                            <constraint firstItem="lnd-yd-7Bf" firstAttribute="top" secondItem="tlq-KI-Ab7" secondAttribute="bottom" constant="10" id="QQa-em-LdD"/>
+                            <constraint firstItem="tlq-KI-Ab7" firstAttribute="top" secondItem="ZpX-Y0-wBf" secondAttribute="top" constant="10" id="SBm-Fe-FRh"/>
+                            <constraint firstItem="tlq-KI-Ab7" firstAttribute="trailing" secondItem="lnd-yd-7Bf" secondAttribute="trailing" id="evz-u3-wZt"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="ZpX-Y0-wBf" firstAttribute="centerY" secondItem="NnP-Le-qEK" secondAttribute="centerY" id="2Md-z7-dn1"/>
+                    <constraint firstItem="ZpX-Y0-wBf" firstAttribute="centerX" secondItem="NnP-Le-qEK" secondAttribute="centerX" id="Ucx-76-r8V"/>
+                    <constraint firstItem="ZpX-Y0-wBf" firstAttribute="top" secondItem="NnP-Le-qEK" secondAttribute="top" id="Xhv-LY-Lx8"/>
+                    <constraint firstItem="ZpX-Y0-wBf" firstAttribute="leading" secondItem="NnP-Le-qEK" secondAttribute="leading" id="fZ8-HT-6hK"/>
+                </constraints>
             </collectionViewCellContentView>
-            <size key="customSize" width="138" height="137"/>
-            <point key="canvasLocation" x="377.09923664122135" y="-25.704225352112676"/>
+            <size key="customSize" width="236" height="401"/>
+            <connections>
+                <outlet property="iconImageView" destination="tlq-KI-Ab7" id="UiT-3b-ZA8"/>
+                <outlet property="nameLabel" destination="lnd-yd-7Bf" id="tz6-uC-bwn"/>
+            </connections>
+            <point key="canvasLocation" x="181.67938931297709" y="59.507042253521128"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="仮.jpg" width="388.79998779296875" height="259.20001220703125"/>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

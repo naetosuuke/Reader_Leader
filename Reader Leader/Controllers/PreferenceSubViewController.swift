@@ -8,22 +8,45 @@
 import UIKit
 
 class PreferenceSubViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationItem.title = "選択されたセルの名前"
-        // Do any additional setup after loading the view.
-    }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBOutlet weak var subPreferenceTableView: UITableView!
+    
+    // MARK: - property
+    let preferenceProperty = ["subPreferenceProperty1", "SubPreferenceProperty2"]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.title = "Preference"
+        subPreferenceTableView.delegate = self
+        subPreferenceTableView.dataSource = self
     }
-    */
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
+    }
 
+    // MARK: - Navigation
 }
+
+
+
+extension PreferenceSubViewController: UITableViewDelegate, UITableViewDataSource{
+    //Cellの高さ
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    //セルの個数
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let cellcount = preferenceProperty.count
+        return cellcount
+    }
+    //cellの中身を設定[preferencePropertyGroup1, preferencePropertyGroup2, preferencePropertyGroup3]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = subPreferenceTableView.dequeueReusableCell(withIdentifier: "cellForSubPreferenceTableView", for:indexPath)
+        cell.textLabel?.text = preferenceProperty[indexPath.row]
+        return cell
+    }
+    
+}
+

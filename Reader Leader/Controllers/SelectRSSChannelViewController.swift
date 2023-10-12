@@ -7,23 +7,14 @@
 
 import UIKit
 
-class SelectRSSChannelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class SelectRSSChannelViewController: UIViewController{
 
     // MARK: IBOutlets
     @IBOutlet weak var label: UIView!
-    
     @IBOutlet weak var launchRSSListButton: UIButton!
+    @IBOutlet weak var selectRSSTableView: UITableView!
     
-    @IBOutlet weak var RSSChannelsTableView: UITableView!
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     // MARK: Properties
     
     
@@ -31,7 +22,10 @@ class SelectRSSChannelViewController: UIViewController, UITableViewDelegate, UIT
     // MARK: segue
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let nib = UINib(nibName: "CustomCellForSelectRSSTableView", bundle: nil)
+        selectRSSTableView.register(nib, forCellReuseIdentifier: "CustomCellForSelectRSSTableView") //cell登録
+        selectRSSTableView.delegate = self
+        selectRSSTableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,6 +38,16 @@ class SelectRSSChannelViewController: UIViewController, UITableViewDelegate, UIT
     
     // MARK: Methods
     
+    
+    // MARK: Controllers
+    
+    
+    
+}
+
+
+extension SelectRSSChannelViewController:UITableViewDelegate, UITableViewDataSource{
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10 // ⇦取得したRSS channelの件数に変更する。RSSChannels.count
     }
@@ -52,13 +56,7 @@ class SelectRSSChannelViewController: UIViewController, UITableViewDelegate, UIT
         // セルを取得する
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "CustomCellForSelectRSSTableView", for: indexPath)
         // セルに表示する値を設定する
-        cell.textLabel!.text = "仮データ"
         return cell
     }
-    
-    
-    // MARK: Controllers
-    
-    
     
 }
