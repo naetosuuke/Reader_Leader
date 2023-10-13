@@ -10,10 +10,16 @@
 import UIKit
 
 class RSSListTableViewController: UIViewController{
- 
+    
+    // MARK: IBOutlets
     @IBOutlet weak var rssListTableView: UITableView!
     @IBOutlet weak var showSideViewButton: UIButton!
     @IBOutlet weak var moveToPreferenceButton: UIButton!
+    
+    // MARK: Properties
+    var rssFeedsName: [String]?
+    var rssFeedsData: [String]?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +27,12 @@ class RSSListTableViewController: UIViewController{
         rssListTableView.register(nib, forCellReuseIdentifier: "CustomCellForRSSListTableView") //cell登録
         rssListTableView.delegate = self
         rssListTableView.dataSource = self
+        rssFeedsName = ["article1", "article2", "article3", "article4","article5","article6","article7","article8","article9","article10"]
+        rssFeedsData = ["data1", "data2", "data3", "data4", "data5", "data6", "data7", "data8", "data9", "data10"]
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true 
+        navigationController?.navigationBar.isHidden = true
     }
 
     
@@ -42,14 +50,22 @@ class RSSListTableViewController: UIViewController{
 
 extension RSSListTableViewController: UITableViewDelegate, UITableViewDataSource{
     
-    func tableView(_ rssListTableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10 // ⇦取得したRSS channelの件数に変更する。RSSChannels.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let rFN = rssFeedsName else { return 0 } // アンラップ
+        let cellCount = rFN.count
+        return cellCount
     }
     
-    func tableView(_ rssListTableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルを取得する
-        let cell: UITableViewCell = rssListTableView.dequeueReusableCell(withIdentifier: "CustomCellForRSSListTableView", for: indexPath)
-        // セルに表示する値を設定する　後日対応
+        let cell = rssListTableView.dequeueReusableCell(withIdentifier: "CustomCellForRSSListTableView", for: indexPath) as! CustomCellForRSSListTableView
+        guard let rFN = rssFeedsName else { return cell } // アンラップ
+        cell.articleLabel.text = rFN[indexPath.row]
+        guard let rFD = rssFeedsData else { return cell } // アンラップ
+        cell.dataLabel.text = rFD[indexPath.row]
+        guard let img = UIImage(named: "KariImage") else { return cell } // アンラップ
+        cell.iconImageView.image = img
+        
         return cell
     }
     

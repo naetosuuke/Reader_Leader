@@ -16,7 +16,7 @@ class SelectRSSChannelViewController: UIViewController{
     
 
     // MARK: Properties
-    
+    var rssChannels: [String]?
     
 
     // MARK: segue
@@ -26,6 +26,7 @@ class SelectRSSChannelViewController: UIViewController{
         selectRSSTableView.register(nib, forCellReuseIdentifier: "CustomCellForSelectRSSTableView") //cell登録
         selectRSSTableView.delegate = self
         selectRSSTableView.dataSource = self
+        rssChannels = ["channel1", "channel2", "channel3", "channel4", "channel5", "channel6", "channel7", "channel8", "channel9", "channel10",]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,12 +50,18 @@ class SelectRSSChannelViewController: UIViewController{
 extension SelectRSSChannelViewController:UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10 // ⇦取得したRSS channelの件数に変更する。RSSChannels.count
+        guard let rc = rssChannels else { return 0 } // アンラップ
+        let cellCount = rc.count
+        return cellCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルを取得する
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "CustomCellForSelectRSSTableView", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCellForSelectRSSTableView", for: indexPath) as! CustomCellForSelectRSSTableView
+        guard let rc = rssChannels else { return cell } // アンラップ
+        cell.nameLabel.text = rc[indexPath.row]
+        guard let img = UIImage(named: "KariImage") else { return cell } // アンラップ
+        cell.iconImageView.image = img
         // セルに表示する値を設定する
         return cell
     }

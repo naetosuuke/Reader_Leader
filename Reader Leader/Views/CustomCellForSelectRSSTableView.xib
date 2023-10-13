@@ -15,14 +15,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="418" height="86"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="仮.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="DTZ-51-mx1">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DTZ-51-mx1">
                         <rect key="frame" x="10" y="10" width="65" height="65"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="65" id="C2v-YQ-waW"/>
                             <constraint firstAttribute="width" constant="65" id="I24-uQ-OFU"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="仮データ" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWX-9l-KFw">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="仮" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWX-9l-KFw">
                         <rect key="frame" x="105" y="9.9999999999999982" width="303" height="20.333333333333329"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -46,7 +46,4 @@
             <point key="canvasLocation" x="149.61832061068702" y="3.5211267605633805"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="仮.jpg" width="388.79998779296875" height="259.20001220703125"/>
-    </resources>
 </document>
