@@ -19,7 +19,6 @@ class SelectRSSChannelViewController: UIViewController{
     var rssChannels: [String]?
     
 
-    // MARK: segue
     override func viewDidLoad() {
         super.viewDidLoad()
         let nib = UINib(nibName: "CustomCellForSelectRSSTableView", bundle: nil)
