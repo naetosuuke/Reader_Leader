@@ -21,6 +21,7 @@ class RSSListSideViewController: UIViewController {
         super.viewDidLoad()
         sortProperty = ["All", "Unread", "Favorite", "Read Later"]
         categoryProperty = ["主要", "国内", "国際", "経済", "エンタメ"] // FIXME: カテゴリは登録状況で動的に変更される。自分が登録したチャンネルをならべられるようにあとで差し替え
+        
         sortTableView.delegate = self
         sortTableView.dataSource = self
         sortTableView.isScrollEnabled = false // スクロール禁止
@@ -73,7 +74,11 @@ extension RSSListSideViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //お気に入り、未読、あとで読む、各カテゴリでソートをかける
+        dismiss(animated: true, completion: nil)
+    }
     
     
     

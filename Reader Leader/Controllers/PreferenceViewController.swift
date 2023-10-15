@@ -54,12 +54,14 @@ extension PreferenceViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
+        switch indexPath.row {
+        
         // channel選択画面への遷移
-        if indexPath.row == 2 {
+        case 2:
             self.performSegue(withIdentifier: "ManageRSSChannelViewControllerSegue", sender: nil)
         // ログアウト、最初の画面へ戻る
-        } else if indexPath.row == 5 {
+        case 5:
             let alert = UIAlertController(title: "Log Out and Back to Log In Page", message: "Please Confirm again..", preferredStyle: .actionSheet)
             let ok = UIAlertAction(title: "OK", style: .default) { (action) in
                 self.dismiss(animated: true, completion: nil)
@@ -72,8 +74,7 @@ extension PreferenceViewController: UITableViewDelegate, UITableViewDataSource{
             alert.addAction(cancel)
             present(alert, animated: true, completion: nil)
             
-
-        } else {
+        default:
             // その他　設定画面への遷移
             self.performSegue(withIdentifier: "PreferenceSubViewControllerSegue", sender: nil)
         }

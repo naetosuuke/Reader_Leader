@@ -11,8 +11,6 @@ class ManageRSSChannelViewController: UIViewController {
 
 
     @IBOutlet weak var manageChannelsTableView: UITableView!
-
-
     
     //MARK: TableViewの高さを動的に設定し、その値を利用してScrollViewの高さもコードで設定する
     
@@ -137,3 +135,4 @@ extension ManageRSSChannelViewController: UITableViewDelegate, UITableViewDataSo
     }
 }
 
+                                
