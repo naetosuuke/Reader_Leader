@@ -14,6 +14,7 @@ class PreferenceSubViewController: UIViewController {
     
     // MARK: - property
     var subPreferenceProperty: [String]?
+    var preferenceIdentifier: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,28 @@ class PreferenceSubViewController: UIViewController {
         subPreferenceTableView.delegate = self
         subPreferenceTableView.dataSource = self
         subPreferenceTableView.isScrollEnabled = false // スクロール禁止
-        subPreferenceProperty = ["pref1", "pref2", "pref3"] // FIXME: 前の画面で選択したセルによって、Tableに記入する内容がかわる その実装が完了したら消す
+        subPreferenceTableView.allowsMultipleSelection = false //　複数チェックを無効
+        guard let preferenceIdentifier = self.preferenceIdentifier else { return }
+        switch preferenceIdentifier {
+        
+        case "ListType":
+            subPreferenceProperty = ["collection", "list"]
+            
+        case "ReloadInterval":
+            subPreferenceProperty = ["30m", "60m", "120m"]
+            
+        case "CharacterSize":
+            subPreferenceProperty = ["min", "mid", "max"]
+
+        case "DarkMode":
+            subPreferenceProperty = ["light", "dark", "match as device setting "]
+
+        default:
+            fatalError("unexpected preference identidfier")
+        }
+        
+        // FIXME: - ここにUserDefault上で設定されている規定値と同じセルにチェックをいれるFuncを挿入する
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,8 +52,6 @@ class PreferenceSubViewController: UIViewController {
 
     // MARK: - Navigation
 }
-
-
 
 extension PreferenceSubViewController: UITableViewDelegate, UITableViewDataSource{
     //Cellの高さ
@@ -44,12 +64,29 @@ extension PreferenceSubViewController: UITableViewDelegate, UITableViewDataSourc
         let cellcount = subPP.count
         return cellcount
     }
-    //cellの中身を設定[preferencePropertyGroup1, preferencePropertyGroup2, preferencePropertyGroup3]
+    //cellの中身を設定
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = subPreferenceTableView.dequeueReusableCell(withIdentifier: "cellForSubPreferenceTableView", for:indexPath)
         guard let subPP = subPreferenceProperty else { return cell } // アンラップ
         cell.textLabel?.text = subPP[indexPath.row]
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none // セル選択時　グレーにならない
         return cell
+    }
+    
+    // セルが選択された時に呼び出される
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at:indexPath)
+        // チェックマークを入れる
+        cell?.accessoryType = .checkmark
+        
+    // FIXME: - ここにUserDefaultに保存する設定を上書きする処理をかく
+    }
+    
+    // セルの選択が外れた時に呼び出される
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at:indexPath)
+        // チェックマークを外す
+        cell?.accessoryType = .none
     }
     
 }

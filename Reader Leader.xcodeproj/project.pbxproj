@@ -31,6 +31,7 @@
 		50F192AA2AD0419400999CDC /* PreferenceSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F192A92AD0419400999CDC /* PreferenceSubViewController.swift */; };
 		50F192AC2AD041AF00999CDC /* ManageRSSChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F192AB2AD041AF00999CDC /* ManageRSSChannelViewController.swift */; };
 		50F192B02AD0422000999CDC /* CustomCellForRSSListCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50F192AF2AD0422000999CDC /* CustomCellForRSSListCollectionView.xib */; };
+		50FE4FFD2AEA1ACF007A3F18 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE4FFC2AEA1ACE007A3F18 /* Preferences.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		50F192A92AD0419400999CDC /* PreferenceSubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceSubViewController.swift; sourceTree = "<group>"; };
 		50F192AB2AD041AF00999CDC /* ManageRSSChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageRSSChannelViewController.swift; sourceTree = "<group>"; };
 		50F192AF2AD0422000999CDC /* CustomCellForRSSListCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCellForRSSListCollectionView.xib; sourceTree = "<group>"; };
+		50FE4FFC2AEA1ACE007A3F18 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		61963E806D14C50ACC597502 /* Pods-Reader Leader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reader Leader.release.xcconfig"; path = "Target Support Files/Pods-Reader Leader/Pods-Reader Leader.release.xcconfig"; sourceTree = "<group>"; };
 		6A0D96BFB800AF3B63349112 /* Pods-Reader Leader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reader Leader.debug.xcconfig"; path = "Target Support Files/Pods-Reader Leader/Pods-Reader Leader.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,6 +149,7 @@
 		50F192862ACC6A3300999CDC /* Reader Leader */ = {
 			isa = PBXGroup;
 			children = (
+				50FE4FFB2AEA1A94007A3F18 /* Models */,
 				5093F1772AD043B3002BE727 /* Controllers */,
 				5093F1762AD043A4002BE727 /* Views */,
 				50F192872ACC6A3300999CDC /* AppDelegate.swift */,
@@ -155,6 +158,14 @@
 				50F192952ACC6A3300999CDC /* Info.plist */,
 			);
 			path = "Reader Leader";
+			sourceTree = "<group>";
+		};
+		50FE4FFB2AEA1A94007A3F18 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				50FE4FFC2AEA1ACE007A3F18 /* Preferences.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		55CA2367FBFECA201C2962E1 /* Frameworks */ = {
@@ -171,7 +182,6 @@
 				6A0D96BFB800AF3B63349112 /* Pods-Reader Leader.debug.xcconfig */,
 				61963E806D14C50ACC597502 /* Pods-Reader Leader.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -301,6 +311,7 @@
 				50F192882ACC6A3300999CDC /* AppDelegate.swift in Sources */,
 				50F192A42AD040F100999CDC /* RSSListSideViewController.swift in Sources */,
 				50F192A62AD0412600999CDC /* ArticleViewController.swift in Sources */,
+				50FE4FFD2AEA1ACF007A3F18 /* Preferences.swift in Sources */,
 				50F192AA2AD0419400999CDC /* PreferenceSubViewController.swift in Sources */,
 				50949FF92AD7C6F200AF30E4 /* CellForPreferenceTableView.swift in Sources */,
 				50F192A82AD0414500999CDC /* PreferenceViewController.swift in Sources */,

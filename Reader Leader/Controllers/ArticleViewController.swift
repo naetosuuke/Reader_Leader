@@ -6,6 +6,10 @@
 //
 // progressBar実装　リンク先参照　https://qiita.com/MilanistaDev/items/be545a5d6387c1e4a3ac
 //
+// This method should not be called on the main thread as it may lead to UI unresponsiveness.→バグのため無視
+// https://ios-docs.dev/this-method-should/
+//
+
 
 import UIKit
 import WebKit
@@ -32,12 +36,13 @@ class ArticleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         articleWebView.allowsBackForwardNavigationGestures = true //スワイプによる進む、戻るを許可する
-        
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false // NavigationControllerのスワイプバックを無効化する
+
         // KVO 監視
         self.articleWebView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         self.articleWebView.addObserver(self, forKeyPath: "loading", options: .new, context: nil)
         
-        let url = URL(string: "https://kyadx7.wixsite.com/naetos---workspace")
+        let url = URL(string: "https://www.google.com")
         let request = URLRequest(url:url!)
         articleWebView.load(request)  // FIXME: - 通信はいるので、Main Threadで描写するように設定する
 
@@ -52,6 +57,11 @@ class ArticleViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true // NavigationControllerのスワイプバックを有効化する
+    }
+    
+    
     // 監視しているWKWebViewのestimatedProgressの値をUIProgressViewに反映
     // TODO: Observer Patternとanimationの実装がわかっていないので、仕様の学習が必要。今回はコードを拝借して実装している。
     // https://qiita.com/MilanistaDev/items/be545a5d6387c1e4a3ac

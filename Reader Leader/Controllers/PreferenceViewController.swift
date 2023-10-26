@@ -45,11 +45,12 @@ extension PreferenceViewController: UITableViewDelegate, UITableViewDataSource{
         let cellcount = PP.count
         return cellcount
     }
-    //cellの中身を設定[preferencePropertyGroup1, preferencePropertyGroup2, preferencePropertyGroup3]
+    //cellの中身を設定
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = preferenceTableView.dequeueReusableCell(withIdentifier: "cellForPreferenceTableView", for:indexPath)
         guard let PP = preferenceProperty else { return cell } // アンラップ
-        cell.textLabel?.text = PP[indexPath.row]
+        cell.textLabel?.text = PP[indexPath.row]// セルが選択された時の背景色を消す
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none // セル選択時　グレーにならない
         return cell
     }
     
@@ -57,11 +58,32 @@ extension PreferenceViewController: UITableViewDelegate, UITableViewDataSource{
         
         switch indexPath.row {
         
-        // channel選択画面への遷移
-        case 2:
+        case 0: // RSS List Type
+            let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "PreferenceSubViewController") as! PreferenceSubViewController
+            nextVC.preferenceIdentifier = "ListType"
+            self.navigationController?.pushViewController(nextVC, animated: true)
+            
+        case 1: // RSS Reload Interval
+            let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "PreferenceSubViewController") as! PreferenceSubViewController
+            nextVC.preferenceIdentifier = "ReloadInterval"
+            self.navigationController?.pushViewController(nextVC, animated: true)
+            
+        case 2: // RSS Feed Management
+            
             self.performSegue(withIdentifier: "ManageRSSChannelViewControllerSegue", sender: nil)
-        // ログアウト、最初の画面へ戻る
-        case 5:
+
+        case 3: // Charactar Size
+        
+            let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "PreferenceSubViewController") as! PreferenceSubViewController
+            nextVC.preferenceIdentifier = "CharacterSize"
+            self.navigationController?.pushViewController(nextVC, animated: true)
+
+        case 4: // Dark Mode
+            let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "PreferenceSubViewController") as! PreferenceSubViewController
+            nextVC.preferenceIdentifier = "DarkMode"
+            self.navigationController?.pushViewController(nextVC, animated: true)
+            
+        case 5: // Log Out
             let alert = UIAlertController(title: "Log Out and Back to Log In Page", message: "Please Confirm again..", preferredStyle: .actionSheet)
             let ok = UIAlertAction(title: "OK", style: .default) { (action) in
                 self.dismiss(animated: true, completion: nil)
@@ -76,13 +98,10 @@ extension PreferenceViewController: UITableViewDelegate, UITableViewDataSource{
             
         default:
             // その他　設定画面への遷移
-            self.performSegue(withIdentifier: "PreferenceSubViewControllerSegue", sender: nil)
+            fatalError("unexpected indexPath")
         }
         
-        
-            
     }
-    
     
 }
 
