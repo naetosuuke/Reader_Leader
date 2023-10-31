@@ -9,7 +9,7 @@ import Foundation
 
 struct FeedData { // 記事imageは保存せず、毎回load時に取得する？
     var title = ""
-    var link = "" // URLはStringで保村する
+    var link = "" // URLはStringで保存する
     var pubDate = ""
     var category = ""
     var isRead = false

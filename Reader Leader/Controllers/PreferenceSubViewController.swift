@@ -9,13 +9,14 @@ import UIKit
 
 class PreferenceSubViewController: UIViewController {
     
-
+    // MARK: - IBOutlets
     @IBOutlet weak var subPreferenceTableView: UITableView!
     
-    // MARK: - property
+    // MARK: - Properties
     var subPreferenceProperty: [String]?
     var preferenceIdentifier: String?
     
+    // MARK: - ViewInit
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Preference"
@@ -41,16 +42,13 @@ class PreferenceSubViewController: UIViewController {
         default:
             fatalError("unexpected preference identidfier")
         }
-        
-        // FIXME: - ここにUserDefault上で設定されている規定値と同じセルにチェックをいれるFuncを挿入する
-        
+        // TODO: - ここにUserDefault上で設定されている規定値と同じセルにチェックをいれるFuncを挿入する
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
     }
 
-    // MARK: - Navigation
+    
 }
 
 extension PreferenceSubViewController: UITableViewDelegate, UITableViewDataSource{

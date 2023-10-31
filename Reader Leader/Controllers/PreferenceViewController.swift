@@ -8,12 +8,14 @@
 import UIKit
 
 class PreferenceViewController: UIViewController {
-
+    
+    // MARK: - IBOutlets
     @IBOutlet weak var preferenceTableView: UITableView!
     
-    // MARK: - property
+    // MARK: - Properties
     var preferenceProperty: [String]?
     
+    // MARK: - ViewInit
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Preference"

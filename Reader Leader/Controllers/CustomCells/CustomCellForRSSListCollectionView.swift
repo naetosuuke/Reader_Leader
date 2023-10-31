@@ -13,6 +13,8 @@ class CustomCellForRSSListCollectionView: UICollectionViewCell {
     @IBOutlet weak var articleLabel: UILabel!
     @IBOutlet weak var dataLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var categoryLabel: UILabel!
+    
     var link = "" // URLはStringで保村する
     var category = ""
     var isRead = false

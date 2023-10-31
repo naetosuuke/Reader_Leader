@@ -9,15 +9,29 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    // MARK: - IBOutlets
     @IBOutlet weak var emailInputField: UITextField!
     @IBOutlet weak var passwordInputField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var containerParentView: UIView!
     
+    // MARK: ViewInit
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setUpView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) { //キーボード　枠外タップで閉じる
+        self.view.endEditing(true)
+    }
+    
+    // MARK: - Methods
+    private func setUpView() {
         containerParentView.layer.cornerRadius = 10.0
         containerParentView.layer.shadowColor = UIColor.black.cgColor
         containerParentView.layer.shadowOpacity = 0.2
@@ -61,14 +75,5 @@ class LoginViewController: UIViewController {
         // ビューにグラデーションレイヤーを追加
         self.view.layer.insertSublayer(gradientLayer, at:0)
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) { //キーボード　枠外タップで閉じる
-        self.view.endEditing(true)
-    }
-    
 }
 

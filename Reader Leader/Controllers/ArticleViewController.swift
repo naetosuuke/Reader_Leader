@@ -18,6 +18,7 @@ import WebKit
 class ArticleViewController: UIViewController {
 
 
+    // MARK: - IBOutlet
     @IBOutlet weak var articleWebView: WKWebView!
 
     // NavigationBarItem
@@ -37,6 +38,7 @@ class ArticleViewController: UIViewController {
     
     var link = ""
     
+    // MARK: - ViewInit
     override func viewDidLoad() {
         super.viewDidLoad()
         articleWebView.allowsBackForwardNavigationGestures = true //スワイプによる進む、戻るを許可する
@@ -66,10 +68,10 @@ class ArticleViewController: UIViewController {
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true // NavigationControllerのスワイプバックを有効化する
     }
     
+    // MARK: - Methods
     
     // 監視しているWKWebViewのestimatedProgressの値をUIProgressViewに反映
-    // TODO: Observer Patternとanimationの実装がわかっていないので、仕様の学習が必要。今回はコードを拝借して実装している。
-    // https://qiita.com/MilanistaDev/items/be545a5d6387c1e4a3ac
+    // TODO: Observer Patternとanimationの実装がわかっていないので、仕様の学習が必要。今回はコードを拝借して実装している。https://qiita.com/MilanistaDev/items/be545a5d6387c1e4a3ac
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
 

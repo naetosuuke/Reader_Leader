@@ -8,20 +8,23 @@
 import Foundation
 
 struct RSSChannelResource {
-    struct rssChannelResourceProperty {
+    let rssChannelResource = ["TopPick", "Domestics", "World", "Business", "Entertainment", "Sports", "IT", "Science", "Local"]
+    let rssChannelResourceDictionary = ["TopPick" : "https://news.yahoo.co.jp/rss/topics/top-picks.xml",
+                            "Domestics" : "https://news.yahoo.co.jp/rss/topics/domestic.xml",
+                            "World" : "https://news.yahoo.co.jp/rss/topics/world.xml",
+                            "Business" : "https://news.yahoo.co.jp/rss/topics/business.xml",
+                            "Entertainment" : "https://news.yahoo.co.jp/rss/topics/entertainment.xml",
+                            "Sports" : "https://news.yahoo.co.jp/rss/topics/sports.xml",
+                            "IT" : "https://news.yahoo.co.jp/rss/topics/it.xml",
+                            "Science" : "https://news.yahoo.co.jp/rss/topics/science.xml",
+                            "Local" : "https://news.yahoo.co.jp/rss/topics/local.xml"]
+    
+    
+}
+
+struct RSSChannelResourceProperty {
         let category = ""
         let url = ""
         let isSubscribed = false
-    }
     
-    let rssChannelResource = ["topPick", "domestics", "world", "business", "entertainment", "sports", "it", "science", "local"]
-    let rssChannelResourceDictionary = ["topPick" : "https://news.yahoo.co.jp/rss/topics/top-picks.xml",
-                            "domestics" : "https://news.yahoo.co.jp/rss/topics/domestic.xml",
-                            "world" : "https://news.yahoo.co.jp/rss/topics/world.xml",
-                            "business" : "https://news.yahoo.co.jp/rss/topics/business.xml",
-                            "entertainment" : "https://news.yahoo.co.jp/rss/topics/entertainment.xml",
-                            "sports" : "https://news.yahoo.co.jp/rss/topics/sports.xml",
-                            "it" : "https://news.yahoo.co.jp/rss/topics/it.xml",
-                            "science" : "https://news.yahoo.co.jp/rss/topics/science.xml",
-                            "local" : "https://news.yahoo.co.jp/rss/topics/local.xml"]
 }

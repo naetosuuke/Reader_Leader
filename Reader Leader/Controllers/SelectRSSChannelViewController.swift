@@ -9,18 +9,19 @@ import UIKit
 
 class SelectRSSChannelViewController: UIViewController{
 
-    // MARK: IBOutlets
+    // MARK: - IBOutlets
     @IBOutlet weak var label: UIView!
     @IBOutlet weak var launchRSSListButton: UIButton!
     @IBOutlet weak var selectRSSTableView: UITableView!
     
 
-    // MARK: Properties
+    // MARK: - Properties
     var rssChannels: [String]?
     
-
+    // MARK: - VIewInit
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpView()
         selectRSSTableView.backgroundColor = view.backgroundColor
         let nib = UINib(nibName: "CustomCellForSelectRSSTableView", bundle: nil)
         selectRSSTableView.register(nib, forCellReuseIdentifier: "CustomCellForSelectRSSTableView") //cell登録
@@ -28,6 +29,15 @@ class SelectRSSChannelViewController: UIViewController{
         selectRSSTableView.dataSource = self
         rssChannels = RSSChannelResource().rssChannelResource
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+
+    // MARK: - Methods
+    private func setUpView() {
         launchRSSListButton.layer.cornerRadius = 10.0
         launchRSSListButton.layer.shadowColor = UIColor.black.cgColor
         launchRSSListButton.layer.shadowOpacity = 0.2
@@ -35,8 +45,6 @@ class SelectRSSChannelViewController: UIViewController{
         launchRSSListButton.layer.shadowRadius = 3.0 // ぼかし具合
         launchRSSListButton.layer.masksToBounds = false // これを入れないと影が反映されない https://cpoint-lab.co.jp/article/202110/21167/
         
-        
-        // FIXME: グラデーション　別のswiftファイルで定義
         let gradientLayer = CAGradientLayer()
         // グラデーションレイヤーの領域をviewと同じに設定
         gradientLayer.frame = self.view.frame
@@ -51,20 +59,6 @@ class SelectRSSChannelViewController: UIViewController{
         // ビューにグラデーションレイヤーを追加
         self.view.layer.insertSublayer(gradientLayer, at:0)
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
-    }
-    
-    
-    // MARK: segues
-    
-    
-    // MARK: Methods
-    
-    
-    // MARK: Controllers
-    
     
     
 }

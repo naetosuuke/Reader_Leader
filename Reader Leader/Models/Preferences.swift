@@ -7,6 +7,9 @@
 
 import Foundation
 
-//struct Preferences: Equatable {
-//    let selectRSSListType: String
-//}
+struct Preferences {
+    var rssListType = "List"
+    var rssReloadInterval = 30
+    var characterSize = "mid"
+    var darkmode = false
+}

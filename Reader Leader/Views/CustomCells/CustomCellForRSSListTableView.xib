@@ -21,7 +21,16 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="JuX-xW-jlb"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="記事カテゴリ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xfq-nP-PnF">
+                        <rect key="frame" x="120" y="55" width="313" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="tkQ-Wz-SO8"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -33,9 +42,9 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hI-vD-ug8">
-                        <rect key="frame" x="120" y="10" width="313" height="60"/>
+                        <rect key="frame" x="120" y="10" width="313" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="60" id="oqn-D9-D9X"/>
+                            <constraint firstAttribute="height" constant="40" id="oqn-D9-D9X"/>
                         </constraints>
                         <string key="text">記事内容　XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</string>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -44,20 +53,24 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="xfq-nP-PnF" firstAttribute="top" secondItem="0hI-vD-ug8" secondAttribute="bottom" constant="5" id="467-71-5bh"/>
                     <constraint firstAttribute="trailing" secondItem="nJt-YW-24E" secondAttribute="trailing" constant="10" id="DrV-SR-gB7"/>
                     <constraint firstItem="0hI-vD-ug8" firstAttribute="top" secondItem="pAu-KG-RNu" secondAttribute="top" constant="10" id="FMp-rr-dUT"/>
+                    <constraint firstItem="xfq-nP-PnF" firstAttribute="leading" secondItem="0hI-vD-ug8" secondAttribute="leading" id="HW9-z0-VdB"/>
                     <constraint firstAttribute="bottom" secondItem="nJt-YW-24E" secondAttribute="bottom" constant="10" id="KXa-Xo-ms4"/>
                     <constraint firstItem="4PY-ZI-I7v" firstAttribute="leading" secondItem="pAu-KG-RNu" secondAttribute="leading" constant="10" id="M5E-CL-MrP"/>
+                    <constraint firstItem="xfq-nP-PnF" firstAttribute="trailing" secondItem="0hI-vD-ug8" secondAttribute="trailing" id="OfE-gw-bCD"/>
                     <constraint firstItem="0hI-vD-ug8" firstAttribute="leading" secondItem="4PY-ZI-I7v" secondAttribute="trailing" constant="10" id="P4g-bf-uCt"/>
                     <constraint firstItem="4PY-ZI-I7v" firstAttribute="top" secondItem="pAu-KG-RNu" secondAttribute="top" constant="15" id="PlF-Ue-p1m"/>
                     <constraint firstItem="nJt-YW-24E" firstAttribute="leading" secondItem="0hI-vD-ug8" secondAttribute="leading" id="RfP-vd-923"/>
                     <constraint firstAttribute="trailing" secondItem="0hI-vD-ug8" secondAttribute="trailing" constant="10" id="ez1-W3-wkh"/>
                     <constraint firstItem="nJt-YW-24E" firstAttribute="trailing" secondItem="0hI-vD-ug8" secondAttribute="trailing" id="lYH-F8-ZUb"/>
-                    <constraint firstItem="nJt-YW-24E" firstAttribute="top" secondItem="0hI-vD-ug8" secondAttribute="bottom" constant="10" id="yLE-kX-Ti2"/>
+                    <constraint firstItem="nJt-YW-24E" firstAttribute="top" secondItem="xfq-nP-PnF" secondAttribute="bottom" constant="5" id="mgF-gQ-Xth"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="articleLabel" destination="0hI-vD-ug8" id="bRh-9n-S2a"/>
+                <outlet property="categoryLabel" destination="xfq-nP-PnF" id="axz-fC-vWm"/>
                 <outlet property="dataLabel" destination="nJt-YW-24E" id="s2P-zU-9VF"/>
                 <outlet property="iconImageView" destination="4PY-ZI-I7v" id="k7B-gh-ASo"/>
             </connections>

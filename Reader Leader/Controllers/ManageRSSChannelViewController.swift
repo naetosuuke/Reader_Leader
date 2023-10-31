@@ -9,10 +9,10 @@ import UIKit
 
 class ManageRSSChannelViewController: UIViewController {
     
-    
+    // MARK: - IBOutlet
     @IBOutlet weak var manageChannelsTableView: UITableView!
     
-    
+    // MARK: - Properties
     var channels: [String]?
     var subscribedChannels: [String]?
     var addChannels: [String]?
@@ -20,6 +20,7 @@ class ManageRSSChannelViewController: UIViewController {
     // Sectionのタイトル
     let sectionTitle = ["Subscribed Channels", "Add Channels"]
     
+    // MARK: - ViewInit
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "RSS Feed Management"
@@ -42,6 +43,7 @@ class ManageRSSChannelViewController: UIViewController {
         manageChannelsTableView.allowsSelectionDuringEditing = true
     }
     
+    // MARK: - Methods
     override func setEditing(_ editing: Bool, animated: Bool) { //Editボタン押下時に発火　UIViewのisEditing状態をTableViewnに反映　https://qiita.com/am10/items/072857551c2c6ad5b2ed
         super.setEditing(editing, animated: animated)
         manageChannelsTableView.isEditing = editing

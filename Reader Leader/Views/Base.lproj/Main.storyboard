@@ -251,9 +251,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="ffe-2w-sD0"/>
                     <connections>
-                        <outlet property="label" destination="ZU5-sJ-aL8" id="guc-KX-8jf"/>
-                        <outlet property="launchRSSListButton" destination="Nzq-e9-cK3" id="Taz-jv-E0O"/>
-                        <outlet property="selectRSSTableView" destination="FQM-q1-bgO" id="6qs-eo-SDy"/>
+                        <outlet property="label" destination="ELw-1c-WDP" id="2vr-Ex-lg0"/>
+                        <outlet property="launchRSSListButton" destination="Nzq-e9-cK3" id="dS4-o3-rPi"/>
+                        <outlet property="selectRSSTableView" destination="FQM-q1-bgO" id="HQs-DZ-KZN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4t8-Jw-pp1" sceneMemberID="firstResponder"/>
@@ -697,9 +697,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Yla-52-2l2"/>
-        <segue reference="81Z-vB-D09"/>
-        <segue reference="J6x-zH-qUz"/>
+        <segue reference="ski-sy-Bup"/>
+        <segue reference="aNz-kS-LYH"/>
+        <segue reference="OAI-5D-0uX"/>
         <segue reference="6ob-bG-Pig"/>
     </inferredMetricsTieBreakers>
     <resources>
