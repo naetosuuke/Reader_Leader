@@ -26,7 +26,7 @@ class SelectRSSChannelViewController: UIViewController{
         selectRSSTableView.register(nib, forCellReuseIdentifier: "CustomCellForSelectRSSTableView") //cell登録
         selectRSSTableView.delegate = self
         selectRSSTableView.dataSource = self
-        rssChannels = ["channel1", "channel2", "channel3", "channel4", "channel5", "channel6", "channel7", "channel8", "channel9", "channel10",]
+        rssChannels = RSSChannelResource().rssChannelResource
         
         launchRSSListButton.layer.cornerRadius = 10.0
         launchRSSListButton.layer.shadowColor = UIColor.black.cgColor
@@ -83,19 +83,23 @@ extension SelectRSSChannelViewController:UITableViewDelegate, UITableViewDataSou
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCellForSelectRSSTableView", for: indexPath) as! CustomCellForSelectRSSTableView
         guard let rc = rssChannels else { return cell } // アンラップ
         cell.nameLabel.text = rc[indexPath.row]
-        guard let img = UIImage(named: "KariImage") else { return cell } // アンラップ
+        // FIXME: Yahooロゴの個人利用OKという明確な表記は公式ページ中から見つけられなかった。表彰権、著作権状は問題ないか要確認
+        guard let img = UIImage(named: "yahoo") else { return cell } // アンラップ
         cell.iconImageView.image = img
-        // セルに表示する値を設定する
+        cell.iconImageView.layer.cornerRadius = 10
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none // 選択時のグレー色変化をやらない
         return cell
     }
     
     // セルが選択された時に呼び出される
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at:indexPath)
+        if cell?.accessoryType == .checkmark { // チェック済、未チェックで分岐
+            cell?.accessoryType = .none
+            // FIXME: - ここにUserDefaultにChannelの登録状況を保存/上書きする処理をかく
+        } else {
             cell?.accessoryType = .checkmark
-    // FIXME: - ここにUserDefaultにChannelの登録状況を保存/上書きする処理をかく
-
+            // FIXME: - ここにUserDefaultにChannelの登録状況を保存/上書きする処理をかく
+        }
     }
-    
-    
 }

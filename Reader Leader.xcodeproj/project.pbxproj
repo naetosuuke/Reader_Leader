@@ -32,6 +32,9 @@
 		50F192AC2AD041AF00999CDC /* ManageRSSChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F192AB2AD041AF00999CDC /* ManageRSSChannelViewController.swift */; };
 		50F192B02AD0422000999CDC /* CustomCellForRSSListCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50F192AF2AD0422000999CDC /* CustomCellForRSSListCollectionView.xib */; };
 		50FE4FFD2AEA1ACF007A3F18 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE4FFC2AEA1ACE007A3F18 /* Preferences.swift */; };
+		50FE4FFF2AEA4944007A3F18 /* RSSFeedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE4FFE2AEA4944007A3F18 /* RSSFeedParser.swift */; };
+		50FE50022AEA4E88007A3F18 /* FeedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE50012AEA4E88007A3F18 /* FeedData.swift */; };
+		50FE50042AEFFCDB007A3F18 /* RSSChannelResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE50032AEFFCDA007A3F18 /* RSSChannelResource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +65,9 @@
 		50F192AB2AD041AF00999CDC /* ManageRSSChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageRSSChannelViewController.swift; sourceTree = "<group>"; };
 		50F192AF2AD0422000999CDC /* CustomCellForRSSListCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCellForRSSListCollectionView.xib; sourceTree = "<group>"; };
 		50FE4FFC2AEA1ACE007A3F18 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		50FE4FFE2AEA4944007A3F18 /* RSSFeedParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeedParser.swift; sourceTree = "<group>"; };
+		50FE50012AEA4E88007A3F18 /* FeedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedData.swift; sourceTree = "<group>"; };
+		50FE50032AEFFCDA007A3F18 /* RSSChannelResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSChannelResource.swift; sourceTree = "<group>"; };
 		61963E806D14C50ACC597502 /* Pods-Reader Leader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reader Leader.release.xcconfig"; path = "Target Support Files/Pods-Reader Leader/Pods-Reader Leader.release.xcconfig"; sourceTree = "<group>"; };
 		6A0D96BFB800AF3B63349112 /* Pods-Reader Leader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reader Leader.debug.xcconfig"; path = "Target Support Files/Pods-Reader Leader/Pods-Reader Leader.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -164,6 +170,9 @@
 			isa = PBXGroup;
 			children = (
 				50FE4FFC2AEA1ACE007A3F18 /* Preferences.swift */,
+				50FE50032AEFFCDA007A3F18 /* RSSChannelResource.swift */,
+				50FE50012AEA4E88007A3F18 /* FeedData.swift */,
+				50FE4FFE2AEA4944007A3F18 /* RSSFeedParser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -303,7 +312,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50FE50042AEFFCDB007A3F18 /* RSSChannelResource.swift in Sources */,
 				50949FF32AD76AE800AF30E4 /* CustomCellForRSSListCollectionView.swift in Sources */,
+				50FE4FFF2AEA4944007A3F18 /* RSSFeedParser.swift in Sources */,
 				50F1928C2ACC6A3300999CDC /* LoginViewController.swift in Sources */,
 				506EC0312AD38D5600AF08C5 /* NavigationController.swift in Sources */,
 				507FC1802AD91F410047A787 /* CellForRSSListSideTableView.swift in Sources */,
@@ -313,6 +324,7 @@
 				50F192A62AD0412600999CDC /* ArticleViewController.swift in Sources */,
 				50FE4FFD2AEA1ACF007A3F18 /* Preferences.swift in Sources */,
 				50F192AA2AD0419400999CDC /* PreferenceSubViewController.swift in Sources */,
+				50FE50022AEA4E88007A3F18 /* FeedData.swift in Sources */,
 				50949FF92AD7C6F200AF30E4 /* CellForPreferenceTableView.swift in Sources */,
 				50F192A82AD0414500999CDC /* PreferenceViewController.swift in Sources */,
 				50F1928A2ACC6A3300999CDC /* SceneDelegate.swift in Sources */,

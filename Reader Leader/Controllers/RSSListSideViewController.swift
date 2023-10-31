@@ -129,40 +129,6 @@ extension RSSListSideViewController: UITableViewDelegate, UITableViewDataSource 
     
     
     
-    
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        switch tableView.tag { //各tableViewのタグで分岐
-//            case 0:
-//                guard let sP = sortProperty else { return 0 } // アンラップ
-//                let cellCount = sP.count
-//                return cellCount
-//            case 1:
-//                guard let cP = categoryProperty else { return 0 } // アンラップ
-//                let cellCount = cP.count
-//                return cellCount
-//            default:
-//                let cellCount = 0
-//                return cellCount
-//        }
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        // セルを取得する
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "CellForRSSListSideTableView", for: indexPath)
-//        switch tableView.tag { //各tableViewのタグで分岐
-//            case 0:
-//                guard let sP = sortProperty else { return cell } // アンラップ
-//                cell.textLabel?.text = sP[indexPath.row]
-//            case 1:
-//                guard let cp = categoryProperty else { return cell } // アンラップ
-//                cell.textLabel?.text = cp[indexPath.row]
-//            default:
-//                return cell
-//        }
-//        return cell
-//    }
-//
 //
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let cell = tableView.cellForRow(at:indexPath)

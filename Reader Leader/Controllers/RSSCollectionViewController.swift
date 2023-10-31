@@ -15,9 +15,9 @@ class RSSCollectionViewController: UIViewController {
     @IBOutlet weak var moveToPreferenceButton: UIButton!
     
     // MARK: Properties
-    var rssFeedsName: [String]?
-    var rssFeedsData: [String]?
-    
+    var feedDatas = [FeedData]()
+    var feedData: FeedData?
+    var channelLinks = ["https://news.yahoo.co.jp/rss/topics/domestic.xml", "https://news.yahoo.co.jp/rss/topics/world.xml"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +27,6 @@ class RSSCollectionViewController: UIViewController {
         rssListCollectionView.delegate = self
         rssListCollectionView.dataSource = self
 
-        
-        rssFeedsName = ["article1", "article2", "article3", "article4","article5","article6","article7","article8","article9","article10"]
-        rssFeedsData = ["data1", "data2", "data3", "data4", "data5", "data6", "data7", "data8", "data9", "data10"]
-        
         showSideViewButton.layer.cornerRadius = 10.0
         showSideViewButton.layer.masksToBounds = false // これを入れないと影が反映されない https://cpoint-lab.co.jp/article/202110/21167/
         
@@ -56,12 +52,19 @@ class RSSCollectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
+        let rssFeedParser = RSSFeedParser()
+        for channelLink in channelLinks {
+            guard let cL = URL(string: channelLink) else { return }
+            rssFeedParser.parseXML(url:cL)
+            self.feedDatas.append(contentsOf: rssFeedParser.feedDatas)  // selfに返している
+        }
+        rssListCollectionView.reloadData()
     }
 
-    //FIXME: 検証用　sideボタン　本来はsideViewを呼び出すところ　仮でcollectionViewの呼び出しを行なっている。collectionViewの画面実装ができればsideView呼び出しに切り替え
+
     
     // MARK: Methods
-    
+    // FIXME: 検証用　sideボタン　本来はsideViewを呼び出すところ　仮でcollectionViewの呼び出しを行なっている。collectionViewの画面実装ができればsideView呼び出しに切り替え
     @IBAction func backToTableView(_ sender: Any) {
         self.navigationController?.popViewController(animated: true) //navigationController中の1つ前の階層にもどる
     }
@@ -71,21 +74,21 @@ class RSSCollectionViewController: UIViewController {
 
 extension RSSCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let rFN = rssFeedsName else { return 0 } // アンラップ
-        let cellCount = rFN.count
+        let cellCount = feedDatas.count
         return cellCount
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        // セルを取得する
+        // Xibでつくったセル情報を読みこむ
         let cell = rssListCollectionView.dequeueReusableCell(withReuseIdentifier: "CustomCellForRSSListCollectionView", for: indexPath) as! CustomCellForRSSListCollectionView
-        guard let rFN = rssFeedsName else { return cell } // アンラップ
-        cell.articleLabel.text = rFN[indexPath.row]
-        guard let rFD = rssFeedsData else { return cell } // アンラップ
-        cell.dataLabel.text = rFD[indexPath.row]
+        let fD = feedDatas[indexPath.row] // feed情報を読み込む
+        cell.articleLabel.text = fD.title
+        cell.dataLabel.text = fD.pubDate
+        cell.link = fD.link
         guard let img = UIImage(named: "KariImage") else { return cell } // アンラップ
         cell.iconImageView.image = img
+        
         cell.layer.shadowColor = UIColor.black.cgColor
         cell.layer.shadowOpacity = 0.2
         cell.layer.shadowOffset = CGSize(width: 5.0, height: 5.0)
@@ -96,10 +99,15 @@ extension RSSCollectionViewController: UICollectionViewDelegate, UICollectionVie
     }
         
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //FIXME: URLを送る
-        self.performSegue(withIdentifier: "ArticleViewControllerSegueFromCollectionView", sender: nil)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) { // Segueを実行し、URLをWebViewControllerに渡す
+        let webView = self.storyboard?.instantiateViewController(withIdentifier: "ArticleViewController") as! ArticleViewController
+        let fD = feedDatas[indexPath.row] // セルと対応するindex番号のfeedDataをインスタンス化
+        webView.link = fD.link
+        self.navigationController?.pushViewController(webView,animated: true) // 普通のpresentメソッドだとnavCの連続性が失われるので注意
     }
+
+
+    
     
     // サイズ調整
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

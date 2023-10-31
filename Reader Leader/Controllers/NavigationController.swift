@@ -18,11 +18,7 @@ class NavigationController: UINavigationController {
               self.navigationController?.navigationBar.isTranslucent = false
               // NavigationItemの色設定（デフォルトは.barStyleによって黒か白）
               self.navigationController?.navigationBar.tintColor = UIColor.red
-              // タイトルの装飾設定
-              self.navigationController?.navigationBar.titleTextAttributes = [
-                  // タイトルの色設定
-                  .foregroundColor: UIColor.red
-                  ]
+
 
         // Do any additional setup after loading the view.
     }

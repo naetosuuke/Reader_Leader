@@ -10,6 +10,7 @@
 // https://ios-docs.dev/this-method-should/
 //
 
+// FIXME: - NavigationBarにWebViewが干渉して見ずらい。Barの下とWebView(とprogressBar)の上が同じ位置になるように修正
 
 import UIKit
 import WebKit
@@ -32,29 +33,33 @@ class ArticleViewController: UIViewController {
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var goSafariButton: UIBarButtonItem!
     
+    // MARK: - Property 
+    
+    var link = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         articleWebView.allowsBackForwardNavigationGestures = true //スワイプによる進む、戻るを許可する
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false // NavigationControllerのスワイプバックを無効化する
-
         // KVO 監視
         self.articleWebView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         self.articleWebView.addObserver(self, forKeyPath: "loading", options: .new, context: nil)
         
-        let url = URL(string: "https://www.google.com")
+        // URL読み込み
+        let url = URL(string: link)
         let request = URLRequest(url:url!)
         articleWebView.load(request)  // FIXME: - 通信はいるので、Main Threadで描写するように設定する
 
     }
     
-    deinit { //画面遷移次に監視対象から外す？
+    deinit { //画面遷移次に監視対象から外す
             self.articleWebView.removeObserver(self, forKeyPath: "estimatedProgress", context: nil)
             self.articleWebView.removeObserver(self, forKeyPath: "loading", context: nil)
         }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
+
     }
 
     override func viewDidDisappear(_ animated: Bool) {

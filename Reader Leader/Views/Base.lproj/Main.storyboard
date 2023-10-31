@@ -435,13 +435,13 @@
         <!--WebPageTitle-->
         <scene sceneID="Uvp-tz-1rs">
             <objects>
-                <viewController id="76N-FV-7fi" customClass="ArticleViewController" customModule="Reader_Leader" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ArticleViewController" id="76N-FV-7fi" customClass="ArticleViewController" customModule="Reader_Leader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3ws-td-zA6">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="If6-D7-Lzj">
-                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                                <rect key="frame" x="0.0" y="91" width="428" height="835"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -467,7 +467,7 @@
                                 </items>
                             </toolbar>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7Oq-JC-mrp">
-                                <rect key="frame" x="0.0" y="47" width="428" height="4"/>
+                                <rect key="frame" x="0.0" y="91" width="428" height="4"/>
                             </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2F8-F0-OBp"/>
@@ -475,13 +475,13 @@
                         <constraints>
                             <constraint firstItem="GR3-Dl-hya" firstAttribute="leading" secondItem="2F8-F0-OBp" secondAttribute="leading" id="3no-e6-Aq0"/>
                             <constraint firstAttribute="bottom" secondItem="If6-D7-Lzj" secondAttribute="bottom" id="5Dg-Hy-SJ6"/>
-                            <constraint firstItem="If6-D7-Lzj" firstAttribute="top" secondItem="3ws-td-zA6" secondAttribute="top" id="845-bG-ZaK"/>
                             <constraint firstItem="If6-D7-Lzj" firstAttribute="leading" secondItem="2F8-F0-OBp" secondAttribute="leading" id="Bks-uv-LL9"/>
-                            <constraint firstAttribute="trailing" secondItem="If6-D7-Lzj" secondAttribute="trailing" id="DOP-0C-FZc"/>
+                            <constraint firstItem="2F8-F0-OBp" firstAttribute="trailing" secondItem="If6-D7-Lzj" secondAttribute="trailing" id="DOP-0C-FZc"/>
                             <constraint firstItem="7Oq-JC-mrp" firstAttribute="leading" secondItem="2F8-F0-OBp" secondAttribute="leading" id="DaL-gq-VY2"/>
                             <constraint firstItem="7Oq-JC-mrp" firstAttribute="top" secondItem="2F8-F0-OBp" secondAttribute="top" id="ad9-Dx-UiN"/>
                             <constraint firstItem="GR3-Dl-hya" firstAttribute="trailing" secondItem="2F8-F0-OBp" secondAttribute="trailing" id="bKG-cM-9k8"/>
                             <constraint firstItem="2F8-F0-OBp" firstAttribute="trailing" secondItem="7Oq-JC-mrp" secondAttribute="trailing" id="lZL-M0-JYZ"/>
+                            <constraint firstItem="If6-D7-Lzj" firstAttribute="top" secondItem="2F8-F0-OBp" secondAttribute="top" id="qmC-GE-u77"/>
                             <constraint firstItem="2F8-F0-OBp" firstAttribute="bottom" secondItem="GR3-Dl-hya" secondAttribute="bottom" id="uyW-ez-V0T"/>
                         </constraints>
                     </view>
@@ -491,6 +491,7 @@
                             <barButtonItem title="あぁ" id="O0v-Fz-0jZ"/>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="addFavoriteButton" destination="Buo-iE-DXk" id="0Al-2Z-eL1"/>
                         <outlet property="articleWebView" destination="If6-D7-Lzj" id="WxK-Z1-Hw8"/>
@@ -506,7 +507,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yc9-Rb-ni2" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4274" y="693"/>
+            <point key="canvasLocation" x="4272.8971962616824" y="692.65658747300222"/>
         </scene>
         <!--Side Menu Navigation Controller-->
         <scene sceneID="M8F-gp-pRO">

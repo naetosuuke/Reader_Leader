@@ -26,8 +26,8 @@ class ManageRSSChannelViewController: UIViewController {
         navigationItem.rightBarButtonItem = editButtonItem
         
         //配列ダミーデータ　あとでmodelから引っ張るよう書き換え
-        channels = ["channel1", "channel2", "channel3", "channel4", "channel5", "channel6", "channel7", "channel8", "channel9", "channel10"]
-        subscribedChannels = ["channel1", "channel2", "channel3",  "channel7", "channel8", "channel9", "channel10"]
+        channels = RSSChannelResource().rssChannelResource
+        subscribedChannels = ["topPick", "domestics", "world", "business", "entertainment"]
         addChannels = channels?.filter { ch in // MARK: - filterメソッドの使い方　慣れてないので要確認(chatGPTで実装)
             guard let subscribedChannels = subscribedChannels else { return false }
             return !subscribedChannels.contains(ch)
@@ -130,17 +130,17 @@ extension ManageRSSChannelViewController: UITableViewDelegate, UITableViewDataSo
         case 0:
             guard let sC = subscribedChannels else { return cell } // アンラップ
             cell.nameLabel?.text = sC[indexPath.row]
-            guard let img = UIImage(named: "KariImage") else { return cell } // アンラップ
+            guard let img = UIImage(named: "yahoo") else { return cell } // アンラップ
             cell.iconImageView.image = img
         case 1:
             guard let aC = addChannels else { return cell } // アンラップ
             cell.nameLabel?.text = aC[indexPath.row]
-            guard let img = UIImage(named: "KariImage") else { return cell } // アンラップ
+            guard let img = UIImage(named: "yahoo") else { return cell } // アンラップ
             cell.iconImageView.image = img
-            
         default:
             return cell
         }
+        cell.iconImageView.layer.cornerRadius = 10
         return cell
     }
     

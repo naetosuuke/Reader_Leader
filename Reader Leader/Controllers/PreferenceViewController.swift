@@ -49,7 +49,7 @@ extension PreferenceViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = preferenceTableView.dequeueReusableCell(withIdentifier: "cellForPreferenceTableView", for:indexPath)
         guard let PP = preferenceProperty else { return cell } // アンラップ
-        cell.textLabel?.text = PP[indexPath.row]// セルが選択された時の背景色を消す
+        cell.textLabel?.text = PP[indexPath.row] // PreferencePropertyを渡す
         cell.selectionStyle = UITableViewCell.SelectionStyle.none // セル選択時　グレーにならない
         return cell
     }

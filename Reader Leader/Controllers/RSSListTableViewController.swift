@@ -17,9 +17,9 @@ class RSSListTableViewController: UIViewController{
     @IBOutlet weak var moveToPreferenceButton: UIButton!
     
     // MARK: Properties
-    var rssFeedsName: [String]?
-    var rssFeedsData: [String]?
-    
+    var feedDatas = [FeedData]()
+    var feedData: FeedData?
+    var channelLinks = ["https://news.yahoo.co.jp/rss/topics/domestic.xml", "https://news.yahoo.co.jp/rss/topics/world.xml"] // UserDefaultからとってくる
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,13 +28,12 @@ class RSSListTableViewController: UIViewController{
         rssListTableView.register(nib, forCellReuseIdentifier: "CustomCellForRSSListTableView") //cell登録
         rssListTableView.delegate = self
         rssListTableView.dataSource = self
-        rssFeedsName = ["article1", "article2", "article3", "article4","article5","article6","article7","article8","article9","article10"]
-        rssFeedsData = ["data1", "data2", "data3", "data4", "data5", "data6", "data7", "data8", "data9", "data10"]
         
+        
+        // MARK: - ライフサイクル上　viewDidAppearで記事情報を入手する。なのでViewDidLoad上では記事情報を使用できない
         
         showSideViewButton.layer.cornerRadius = 10.0
         showSideViewButton.layer.masksToBounds = false // これを入れないと影が反映されない https://cpoint-lab.co.jp/article/202110/21167/
-        
         moveToPreferenceButton.layer.cornerRadius = 10.0
         moveToPreferenceButton.layer.masksToBounds = false // これを入れないと影が反映されない https://cpoint-lab.co.jp/article/202110/21167/
         
@@ -58,7 +57,17 @@ class RSSListTableViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
+        let rssFeedParser = RSSFeedParser()
+        for channelLink in channelLinks {
+            guard let cL = URL(string: channelLink) else { return }
+            rssFeedParser.parseXML(url:cL)
+            self.feedDatas.append(contentsOf: rssFeedParser.feedDatas)  // selfに返している
+        }
+        
+        rssListTableView.reloadData()
+
     }
+
     
     // MARK: - Navigation
 
@@ -74,29 +83,29 @@ class RSSListTableViewController: UIViewController{
 extension RSSListTableViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let rFN = rssFeedsName else { return 0 } // アンラップ
-        let cellCount = rFN.count
+        let cellCount = feedDatas.count
         return cellCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルを取得する
         let cell = rssListTableView.dequeueReusableCell(withIdentifier: "CustomCellForRSSListTableView", for: indexPath) as! CustomCellForRSSListTableView
-        guard let rFN = rssFeedsName else { return cell } // アンラップ
-        cell.articleLabel.text = rFN[indexPath.row]
-        guard let rFD = rssFeedsData else { return cell } // アンラップ
-        cell.dataLabel.text = rFD[indexPath.row]
+        let fD = feedDatas[indexPath.row] // セルの
+        cell.articleLabel.text = fD.title
+        cell.dataLabel.text = fD.pubDate
+        cell.link = fD.link
         guard let img = UIImage(named: "KariImage") else { return cell } // アンラップ
         cell.iconImageView.image = img
         cell.selectionStyle = UITableViewCell.SelectionStyle.none // セル選択時　グレーにならない
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // FIXME: - 遷移先に渡すURLを取得、prepareで次の画面に渡す
-        
-        //画面遷移
-        self.performSegue(withIdentifier: "ArticleViewControllerSegue", sender: nil)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { // Segueを実行し、URLをWebViewControllerに渡す
+        let webView = self.storyboard?.instantiateViewController(withIdentifier: "ArticleViewController") as! ArticleViewController
+        let fD = feedDatas[indexPath.row] // セルと対応するindex番号のfeedDataをインスタンス化
+        webView.link = fD.link
+        print ("check fD.link" + fD.link)
+        self.navigationController?.pushViewController(webView,animated: true) // 普通のpresentメソッドだとnavCの連続性が失われるので注意
     }
     
     
