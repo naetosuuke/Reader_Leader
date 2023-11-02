@@ -25,7 +25,6 @@
 		50F192A02AD040BF00999CDC /* RSSListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F1929F2AD040BF00999CDC /* RSSListTableViewController.swift */; };
 		50F192A22AD040DE00999CDC /* RSSCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F192A12AD040DE00999CDC /* RSSCollectionViewController.swift */; };
 		50F192A42AD040F100999CDC /* RSSListSideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F192A32AD040F100999CDC /* RSSListSideViewController.swift */; };
-		50F192A62AD0412600999CDC /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F192A52AD0412600999CDC /* ArticleViewController.swift */; };
 		50F192A82AD0414500999CDC /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F192A72AD0414500999CDC /* PreferenceViewController.swift */; };
 		50F192AA2AD0419400999CDC /* PreferenceSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F192A92AD0419400999CDC /* PreferenceSubViewController.swift */; };
 		50F192AC2AD041AF00999CDC /* ManageRSSChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F192AB2AD041AF00999CDC /* ManageRSSChannelViewController.swift */; };
@@ -57,7 +56,6 @@
 		50F1929F2AD040BF00999CDC /* RSSListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSListTableViewController.swift; sourceTree = "<group>"; };
 		50F192A12AD040DE00999CDC /* RSSCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSCollectionViewController.swift; sourceTree = "<group>"; };
 		50F192A32AD040F100999CDC /* RSSListSideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSListSideViewController.swift; sourceTree = "<group>"; };
-		50F192A52AD0412600999CDC /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		50F192A72AD0414500999CDC /* PreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceViewController.swift; sourceTree = "<group>"; };
 		50F192A92AD0419400999CDC /* PreferenceSubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceSubViewController.swift; sourceTree = "<group>"; };
 		50F192AB2AD041AF00999CDC /* ManageRSSChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageRSSChannelViewController.swift; sourceTree = "<group>"; };
@@ -97,7 +95,6 @@
 			children = (
 				50FE50052AF12F3A007A3F18 /* MainView */,
 				50F192A72AD0414500999CDC /* PreferenceViewController.swift */,
-				50F192A52AD0412600999CDC /* ArticleViewController.swift */,
 				50F192AB2AD041AF00999CDC /* ManageRSSChannelViewController.swift */,
 				50F1928B2ACC6A3300999CDC /* LoginViewController.swift */,
 				50F1929D2AD0409300999CDC /* SelectRSSChannelViewController.swift */,
@@ -325,7 +322,6 @@
 				50949FE42AD54DE900AF30E4 /* CustomCellForRSSListTableView.swift in Sources */,
 				50F192882ACC6A3300999CDC /* AppDelegate.swift in Sources */,
 				50F192A42AD040F100999CDC /* RSSListSideViewController.swift in Sources */,
-				50F192A62AD0412600999CDC /* ArticleViewController.swift in Sources */,
 				50FE4FFD2AEA1ACF007A3F18 /* Preferences.swift in Sources */,
 				50F192AA2AD0419400999CDC /* PreferenceSubViewController.swift in Sources */,
 				50FE50022AEA4E88007A3F18 /* FeedData.swift in Sources */,

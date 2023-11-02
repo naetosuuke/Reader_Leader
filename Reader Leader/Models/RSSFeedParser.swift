@@ -11,17 +11,30 @@ class RSSFeedParser: NSObject, XMLParserDelegate { // Parserをイニシャラ�
     
     // MARK: - Properties
     var currentString = "" // elementに紐づく値を保存するためのプロパティ　ストアドじゃなくてもいいかもしれない
-    var feedDatas = [FeedData]()
+    var feedDatas = [FeedData]() // TODO: なぜインスタンス化させている？理由を調べる
     var feedData: FeedData?
-    var isInsideChannel = false //
+    var isInsideChannel = false // パース時、カテゴリと記事名が同じtitleという要素で見つかるので、その仕分け用に設定
     var parsingCategory = "" // パース中のカテゴリ名を格納するプロパティ
     
     // MARK: - Methods
-    func parseXML(data: Data) {
-        self.feedDatas = []
-        let parser = XMLParser(data: data) // XMLParser(contentOf: URL) も使えるが、URL型の代入にするとURLSessionによる非同期処理ができなくなる(戻り値がURLでなくData方)
-        parser.delegate = self
-        parser.parse() //Parseの実行
+    func downloadAndParseXML(channelLinks: [String]) async -> [FeedData] {  // MARK: chatGPTによるリファクタ VC上でGroupDispatchを使って非同期処理を行なっていたが、async/awaitを使って書き換え
+        var fetchedFeedDatas: [FeedData] = []
+        for channelLink in channelLinks {
+            guard let cL = URL(string: channelLink) else {
+                print("Invalid URL: \(channelLink)")
+                continue
+            }
+            do { // エラーの補足を行う
+                let data = try await URLSession.shared.data(from: cL).0 //awaitで非同期操作の完了を待つ　この0は戻り値が(Data, URLResponse)と2つあるので、0番目(先頭)の戻り値を適用する　という意味
+                let parser = XMLParser(data: data)
+                parser.delegate = self
+                parser.parse()
+                fetchedFeedDatas.append(contentsOf: self.feedDatas)
+            } catch {
+                print("Failed to fetch data for URL: \(channelLink)")
+            }
+        }
+        return fetchedFeedDatas
     }
     
     // MARK: - XMLParserDelegateMethods
@@ -33,7 +46,7 @@ class RSSFeedParser: NSObject, XMLParserDelegate { // Parserをイニシャラ�
         }
         if elementName == "item" { // itemという要素が見つかるたびに
             self.isInsideChannel = false
-            self.feedData = FeedData() // FeedData構造体が初期化される
+            self.feedData = FeedData() // FeedDataインスタンスが初期化される
         }
     }
     
@@ -63,6 +76,6 @@ class RSSFeedParser: NSObject, XMLParserDelegate { // Parserをイニシャラ�
     // パースが完了した時に呼ばれるメソッド
     func parserDidEndDocument(_ parser: XMLParser) {
         // パースが完了したときにデータを使用するか、出力するなどの処理をここに追加できます。
-        self.currentString = "" // FIXME: パースされた要素の補完に使用したcurrentStringを空欄にしているが、別にいらないorもっと適切な書き方ある？
+        self.currentString = "" // FIXME: パースされた値の格納に使用したcurrentStringを初期化しているが、別にいらないorもっと適切な書き方ある？
     }
 }

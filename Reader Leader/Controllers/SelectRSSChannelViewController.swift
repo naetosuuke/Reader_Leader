@@ -28,7 +28,6 @@ class SelectRSSChannelViewController: UIViewController{
         selectRSSTableView.delegate = self
         selectRSSTableView.dataSource = self
         rssChannels = RSSChannelResource().rssChannelResource
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,13 +58,11 @@ class SelectRSSChannelViewController: UIViewController{
         // ビューにグラデーションレイヤーを追加
         self.view.layer.insertSublayer(gradientLayer, at:0)
     }
-    
-    
 }
 
 
 extension SelectRSSChannelViewController:UITableViewDelegate, UITableViewDataSource{
-    
+    // MARK: - UITableView Delegate, Datasource Method
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let rc = rssChannels else { return 0 } // アンラップ
         let cellCount = rc.count

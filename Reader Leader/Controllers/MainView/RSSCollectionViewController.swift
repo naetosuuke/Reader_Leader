@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class RSSCollectionViewController: UIViewController {
 
@@ -34,7 +35,11 @@ class RSSCollectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
-        getXMLAndReloadCollectionView() // 画面表示時、XMLファイルを入手してTableViewを更新する。
+        async {
+            let fetchedFeedDatas = await RSSFeedParser().downloadAndParseXML(channelLinks: channelLinks)
+            self.feedDatas = fetchedFeedDatas
+            self.rssListCollectionView.reloadData()
+        }
         // TODO: お気に入りのみ表示する場合は、XMLの取得、パース手配が不要になる。UserDefaultからFeedDatasを呼び出す別メソッドを用意しなければならない
     }
     
@@ -57,28 +62,6 @@ class RSSCollectionViewController: UIViewController {
         self.view.layer.insertSublayer(gradientLayer, at:0)
     }
     
-    private func getXMLAndReloadCollectionView() {
-        feedDatas.removeAll() // 一旦TableViewの中身をカラにする
-        let rssFeedParser = RSSFeedParser()
-        let group = DispatchGroup() // DispatchGroupを利用して、対象のコードを逐次処理とする
-        for channelLink in channelLinks {
-            guard let cL = URL(string: channelLink) else { return }
-            group.enter() //逐次処理の開始 Dispatch Groupの作成
-            let task = URLSession.shared.dataTask(with: cL, completionHandler: { (data, response, error) in // こうすることで、1件1件のURLSessionを分割し、非同期に実行できるようにする https://qiita.com/eito_2/items/8dc0c5ed48a353c2a1b2
-                defer { //deferステートメント 特定のコードを関数の最後に実行することができる。
-                    group.leave() // URLSessionのクロージャが実行されるたび、タスクが完了したことをDispatch Groupに通知
-                }
-                guard let data = data else { return } //URLSessionで入手したデータのアンラップ
-                rssFeedParser.parseXML(data:data)
-                self.feedDatas.append(contentsOf: rssFeedParser.feedDatas)  // selfに返している
-            })
-            task.resume()
-        }
-        group.notify(queue: .main) { // main queueで起きたすべてタスクが完了すると呼び出される
-            self.rssListCollectionView.reloadData()
-        }
-    }
-    
     
     // TODO: 検証用　sideボタン　本来はsideViewを呼び出すところ　仮でcollectionViewの呼び出しを行なっている。collectionViewの画面実装ができればsideView呼び出しに切り替え
     @IBAction func backToTableView(_ sender: Any) {
@@ -98,6 +81,8 @@ extension RSSCollectionViewController: UICollectionViewDelegate, UICollectionVie
         // Xibでつくったセル情報を読みこむ
         let cell = rssListCollectionView.dequeueReusableCell(withReuseIdentifier: "CustomCellForRSSListCollectionView", for: indexPath) as! CustomCellForRSSListCollectionView
         let fD = feedDatas[indexPath.row] // feed情報を読み込む
+        // TODO: - ここにソート用の分岐を作成する(お気に入り、未読、既読、各カテゴリによってfeedDataの取捨選択をする)
+
         cell.articleLabel.text = fD.title
         cell.dataLabel.text = fD.pubDate
         cell.categoryLabel.text = fD.category
@@ -115,10 +100,12 @@ extension RSSCollectionViewController: UICollectionViewDelegate, UICollectionVie
     }
         
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) { // Segueを実行し、URLをWebViewControllerに渡す
-        let webView = self.storyboard?.instantiateViewController(withIdentifier: "ArticleViewController") as! ArticleViewController
         let fD = feedDatas[indexPath.row] // セルと対応するindex番号のfeedDataをインスタンス化
-        webView.link = fD.link
-        self.navigationController?.pushViewController(webView,animated: true) // 普通のpresentメソッドだとnavCの連続性が失われるので注意
+        let url = URL(string:fD.link)
+        if let url = url {
+            let vc = SFSafariViewController(url: url)
+            present(vc, animated: true, completion: nil)
+        }
     }
 
     // サイズ調整

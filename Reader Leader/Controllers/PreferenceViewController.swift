@@ -35,8 +35,8 @@ class PreferenceViewController: UIViewController {
 }
 
 
-
 extension PreferenceViewController: UITableViewDelegate, UITableViewDataSource{
+    // MARK: - UITableView Delegate, Datasource Method
     //Cellの高さ
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60

@@ -54,7 +54,7 @@ class ManageRSSChannelViewController: UIViewController {
 
 
 extension ManageRSSChannelViewController: UITableViewDelegate, UITableViewDataSource {
-    
+    // MARK: - UITableView Delegate, Datasource Method
     //セクション数
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitle.count

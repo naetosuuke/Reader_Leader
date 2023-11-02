@@ -8,7 +8,7 @@
 import Foundation
 
 struct RSSChannelResource {
-    let rssChannelResource = ["TopPick", "Domestics", "World", "Business", "Entertainment", "Sports", "IT", "Science", "Local"]
+    let rssChannelResource = ["TopPick", "Domestics", "World", "Business", "Entertainment", "Sports", "IT", "Science", "Local"] // リソースを置く
     let rssChannelResourceDictionary = ["TopPick" : "https://news.yahoo.co.jp/rss/topics/top-picks.xml",
                             "Domestics" : "https://news.yahoo.co.jp/rss/topics/domestic.xml",
                             "World" : "https://news.yahoo.co.jp/rss/topics/world.xml",
@@ -18,13 +18,10 @@ struct RSSChannelResource {
                             "IT" : "https://news.yahoo.co.jp/rss/topics/it.xml",
                             "Science" : "https://news.yahoo.co.jp/rss/topics/science.xml",
                             "Local" : "https://news.yahoo.co.jp/rss/topics/local.xml"]
-    
-    
 }
 
 struct RSSChannelResourceProperty {
         let category = ""
         let url = ""
         let isSubscribed = false
-    
 }

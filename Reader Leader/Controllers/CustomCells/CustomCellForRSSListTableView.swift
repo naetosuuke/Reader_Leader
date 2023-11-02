@@ -17,7 +17,7 @@ class CustomCellForRSSListTableView: UITableViewCell {
 
 
     // MARK: - Properties
-    var link = "" // URLはStringで保村する
+    var link = "" // URLはStringで保存する
     var category = ""
     var isRead = false
     var readLater = false
@@ -27,5 +27,4 @@ class CustomCellForRSSListTableView: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
 }

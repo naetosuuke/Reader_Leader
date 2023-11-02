@@ -42,7 +42,6 @@ class PreferenceSubViewController: UIViewController {
         default:
             fatalError("unexpected preference identidfier")
         }
-        // TODO: - ここにUserDefault上で設定されている規定値と同じセルにチェックをいれるFuncを挿入する
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
@@ -52,6 +51,7 @@ class PreferenceSubViewController: UIViewController {
 }
 
 extension PreferenceSubViewController: UITableViewDelegate, UITableViewDataSource{
+    // MARK: - UITableView Delegate, Datasource Method
     //Cellの高さ
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
@@ -68,6 +68,7 @@ extension PreferenceSubViewController: UITableViewDelegate, UITableViewDataSourc
         guard let subPP = subPreferenceProperty else { return cell } // アンラップ
         cell.textLabel?.text = subPP[indexPath.row]
         cell.selectionStyle = UITableViewCell.SelectionStyle.none // セル選択時　グレーにならない
+        // TODO: - UserDefaultに選択された文字列と、セルのsubPreferencePropertyが一致していればaccessoryTypeを.checkmarkに設定する。
         return cell
     }
     
@@ -76,8 +77,7 @@ extension PreferenceSubViewController: UITableViewDelegate, UITableViewDataSourc
         let cell = tableView.cellForRow(at:indexPath)
         // チェックマークを入れる
         cell?.accessoryType = .checkmark
-        
-    // FIXME: - ここにUserDefaultに保存する設定を上書きする処理をかく
+        // TODO: - UserDefaultに選択されたセルのsubPreferenceProperty文字列を登録
     }
     
     // セルの選択が外れた時に呼び出される

@@ -38,6 +38,7 @@ class RSSListSideViewController: UIViewController {
 
 extension RSSListSideViewController: UITableViewDelegate, UITableViewDataSource {
 
+    // MARK: - UITableView Delegate, Datasource Method
     //セクション数
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitle.count
@@ -114,10 +115,7 @@ extension RSSListSideViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at:indexPath)
         cell?.accessoryType = .checkmark
-        // FIXME: - ここに登録済み配列への追加、解除を行うメソッドを作る
-        // if 登録済み配列の中にある　＝　該当の値をリストから削除、 else 該当の値をリストに追加
-        
-
+        // TODO: - ここでソート用の識別フラグを変更、UserDefault上に登録し、一つ前のListTable/CollectionViewをreloadさせる ソート機能は単体のClassとして分離させる？もしくはVC埋め込む
     }
     
     // セルの選択が外れた時に呼び出される
@@ -126,24 +124,4 @@ extension RSSListSideViewController: UITableViewDelegate, UITableViewDataSource 
         // チェックマークを外す
         cell?.accessoryType = .none
     }
-    
-    
-    
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let cell = tableView.cellForRow(at:indexPath)
-//        // チェックマークを入れる
-//        cell?.accessoryType = .checkmark
-//        //お気に入り、未読、あとで読む、各カテゴリでソートをかける
-//        // FIXME: - ここにUserDefaultに保存する設定を上書きする処理をかく
-//        // FIXME: - NavigationController上　1つ前の画面にソート用のIdentifierをわたしてviewdidloadを再度行うよう実装
-//    }
-//
-//    // セルの選択が外れた時に呼び出される
-//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        let cell = tableView.cellForRow(at:indexPath)
-//        // チェックマークを外す
-//        cell?.accessoryType = .none
-//    }
-//
 }
