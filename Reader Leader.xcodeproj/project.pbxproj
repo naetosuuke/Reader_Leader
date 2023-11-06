@@ -15,6 +15,7 @@
 		50949FF32AD76AE800AF30E4 /* CustomCellForRSSListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50949FF22AD76AE800AF30E4 /* CustomCellForRSSListCollectionView.swift */; };
 		50949FF92AD7C6F200AF30E4 /* CellForPreferenceTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50949FF82AD7C6F200AF30E4 /* CellForPreferenceTableView.swift */; };
 		50A7C9EC2AD042D100BB3B9B /* CustomCellForRSSListTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50A7C9EB2AD042D100BB3B9B /* CustomCellForRSSListTableView.xib */; };
+		50B118322AF8C99A0096E9AC /* RSSFeedHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B118312AF8C99A0096E9AC /* RSSFeedHandler.swift */; };
 		50C4F5F92AD8E7CF0086D21E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50C4F5F82AD8E7CF0086D21E /* Assets.xcassets */; };
 		50F192882ACC6A3300999CDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F192872ACC6A3300999CDC /* AppDelegate.swift */; };
 		50F1928A2ACC6A3300999CDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F192892ACC6A3300999CDC /* SceneDelegate.swift */; };
@@ -44,6 +45,7 @@
 		50949FF22AD76AE800AF30E4 /* CustomCellForRSSListCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellForRSSListCollectionView.swift; sourceTree = "<group>"; };
 		50949FF82AD7C6F200AF30E4 /* CellForPreferenceTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForPreferenceTableView.swift; sourceTree = "<group>"; };
 		50A7C9EB2AD042D100BB3B9B /* CustomCellForRSSListTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCellForRSSListTableView.xib; sourceTree = "<group>"; };
+		50B118312AF8C99A0096E9AC /* RSSFeedHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeedHandler.swift; sourceTree = "<group>"; };
 		50C4F5F82AD8E7CF0086D21E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		50F192842ACC6A3300999CDC /* Reader Leader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reader Leader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50F192872ACC6A3300999CDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -150,8 +152,8 @@
 				50FE4FFB2AEA1A94007A3F18 /* Models */,
 				5093F1772AD043B3002BE727 /* Controllers */,
 				5093F1762AD043A4002BE727 /* Views */,
-				50F192872ACC6A3300999CDC /* AppDelegate.swift */,
 				50C4F5F82AD8E7CF0086D21E /* Assets.xcassets */,
+				50F192872ACC6A3300999CDC /* AppDelegate.swift */,
 				50F192892ACC6A3300999CDC /* SceneDelegate.swift */,
 				50F192952ACC6A3300999CDC /* Info.plist */,
 			);
@@ -165,6 +167,7 @@
 				50FE50032AEFFCDA007A3F18 /* RSSChannelResource.swift */,
 				50FE50012AEA4E88007A3F18 /* FeedData.swift */,
 				50FE4FFE2AEA4944007A3F18 /* RSSFeedParser.swift */,
+				50B118312AF8C99A0096E9AC /* RSSFeedHandler.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				50FE4FFF2AEA4944007A3F18 /* RSSFeedParser.swift in Sources */,
 				50F1928C2ACC6A3300999CDC /* LoginViewController.swift in Sources */,
 				507FC1802AD91F410047A787 /* CellForRSSListSideTableView.swift in Sources */,
+				50B118322AF8C99A0096E9AC /* RSSFeedHandler.swift in Sources */,
 				50949FE42AD54DE900AF30E4 /* CustomCellForRSSListTableView.swift in Sources */,
 				50F192882ACC6A3300999CDC /* AppDelegate.swift in Sources */,
 				50F192A42AD040F100999CDC /* RSSListSideViewController.swift in Sources */,

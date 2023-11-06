@@ -30,9 +30,9 @@ class RSSListSideViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) { 
+        super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
     }
-    
 }
 
 
@@ -108,14 +108,28 @@ extension RSSListSideViewController: UITableViewDelegate, UITableViewDataSource 
         default:
             return cell
         }
+        if cell.textLabel!.text == UserDefaults.standard.string(forKey: "chosenCategoryForListView") {
+            cell.accessoryType = .checkmark
+        }
+        
         return cell
     }
     
     // セルが選択された時に呼び出される
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at:indexPath)
-        cell?.accessoryType = .checkmark
-        // TODO: - ここでソート用の識別フラグを変更、UserDefault上に登録し、一つ前のListTable/CollectionViewをreloadさせる ソート機能は単体のClassとして分離させる？もしくはVC埋め込む
+        for cell in tableView.visibleCells { //見えるセルを全て.none型に変える　chatGPT実装
+            cell.accessoryType = .none
+        }
+        
+        guard let cell = tableView.cellForRow(at:indexPath) else { return }
+        cell.accessoryType = .checkmark
+        UserDefaults.standard.set(cell.textLabel!.text, forKey: "chosenCategoryForListView") //UserDefaultにカテゴリ名を保存
+        
+//        NotificationCenter.default.post( // https://cpoint-lab.co.jp/article/201910/12386/ 押した後、ListViewをリロードして整列させ直す方法を考える(delegateか？)
+//                    name: Notification.Name("SelectMenuNotification"),
+//                    object: nil,
+//                    userInfo: ["itemNo": indexPath.row] // 返したいデータをセットする
+//                )
     }
     
     // セルの選択が外れた時に呼び出される

@@ -31,6 +31,7 @@ class SelectRSSChannelViewController: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
     }
     
@@ -74,7 +75,6 @@ extension SelectRSSChannelViewController:UITableViewDelegate, UITableViewDataSou
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCellForSelectRSSTableView", for: indexPath) as! CustomCellForSelectRSSTableView
         guard let rc = rssChannels else { return cell } // アンラップ
         cell.nameLabel.text = rc[indexPath.row]
-        // FIXME: Yahooロゴの個人利用OKという明確な表記は公式ページ中から見つけられなかった。表彰権、著作権状は問題ないか要確認
         guard let img = UIImage(named: "yahoo") else { return cell } // アンラップ
         cell.iconImageView.image = img
         cell.iconImageView.layer.cornerRadius = 10

@@ -9,14 +9,14 @@ import UIKit
 import SafariServices
 
 class RSSCollectionViewController: UIViewController {
-
+    
     // MARK: - IBOutlets
     @IBOutlet weak var rssListCollectionView: UICollectionView!
     @IBOutlet weak var showSideViewButton: UIButton!
     @IBOutlet weak var moveToPreferenceButton: UIButton!
     
     // MARK: - Properties
-    var feedDatas = [FeedData]()
+    var storedFeedDatas = [FeedData]()
     var feedData: FeedData?
     var channelLinks = ["https://news.yahoo.co.jp/rss/topics/domestic.xml", "https://news.yahoo.co.jp/rss/topics/world.xml"]
     
@@ -30,18 +30,20 @@ class RSSCollectionViewController: UIViewController {
         rssListCollectionView.delegate = self
         rssListCollectionView.dataSource = self
         setUpView() // layout, layer実装
- 
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
         async {
             let fetchedFeedDatas = await RSSFeedParser().downloadAndParseXML(channelLinks: channelLinks)
-            self.feedDatas = fetchedFeedDatas
-            self.rssListCollectionView.reloadData()
+            let checkedFeedDatas = RSSFeedHandler().checkDuplicationAndStoreDatas(fetchedFeedDatas: fetchedFeedDatas, storedFeedDatas: storedFeedDatas)
+            storedFeedDatas.append(contentsOf: checkedFeedDatas)
+            rssListCollectionView.reloadData()
         }
-        // TODO: お気に入りのみ表示する場合は、XMLの取得、パース手配が不要になる。UserDefaultからFeedDatasを呼び出す別メソッドを用意しなければならない
     }
+    // TODO: お気に入りのみ表示する場合は、XMLの取得、パース手配が不要になる。UserDefaultからFeedDatasを呼び出す別メソッドを用意しなければならない
     
     // MARK: - Methods
     private func setUpView() {
@@ -62,7 +64,6 @@ class RSSCollectionViewController: UIViewController {
         self.view.layer.insertSublayer(gradientLayer, at:0)
     }
     
-    
     // TODO: 検証用　sideボタン　本来はsideViewを呼び出すところ　仮でcollectionViewの呼び出しを行なっている。collectionViewの画面実装ができればsideView呼び出しに切り替え
     @IBAction func backToTableView(_ sender: Any) {
         self.navigationController?.popViewController(animated: true) //navigationController中の1つ前の階層にもどる
@@ -72,7 +73,7 @@ class RSSCollectionViewController: UIViewController {
 
 extension RSSCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let cellCount = feedDatas.count
+        let cellCount = storedFeedDatas.count
         return cellCount
         
     }
@@ -80,13 +81,29 @@ extension RSSCollectionViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // Xibでつくったセル情報を読みこむ
         let cell = rssListCollectionView.dequeueReusableCell(withReuseIdentifier: "CustomCellForRSSListCollectionView", for: indexPath) as! CustomCellForRSSListCollectionView
-        let fD = feedDatas[indexPath.row] // feed情報を読み込む
+        let fD = storedFeedDatas[indexPath.row] // feed情報を読み込む
         // TODO: - ここにソート用の分岐を作成する(お気に入り、未読、既読、各カテゴリによってfeedDataの取捨選択をする)
-
+        
         cell.articleLabel.text = fD.title
         cell.dataLabel.text = fD.pubDate
         cell.categoryLabel.text = fD.category
         cell.link = fD.link
+        
+        cell.flagLabel.text = ""
+        cell.isRead = fD.isRead
+        if !cell.isRead {
+            cell.flagLabel.text! += "🔵"
+        }
+        cell.isReadLater = fD.isReadLater
+        if cell.isReadLater {
+            cell.flagLabel.text! += "🔖"
+        }
+        cell.isFavorite = fD.isFavorite
+        if cell.isFavorite {
+            cell.flagLabel.text! += "⭐️"
+        }
+        
+        
         guard let img = UIImage(named: "yahoo") else { return cell } // FIXME: 対象のURLからHTMLソースを入手し、サムネイルが入った要素から画像データを抽出してimgに当てる (作業が重そうだったので今回はパス)
         cell.iconImageView.image = img
         
@@ -98,31 +115,49 @@ extension RSSCollectionViewController: UICollectionViewDelegate, UICollectionVie
         
         return cell
     }
-        
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) { // Segueを実行し、URLをWebViewControllerに渡す
-        let fD = feedDatas[indexPath.row] // セルと対応するindex番号のfeedDataをインスタンス化
+        let fD = storedFeedDatas[indexPath.row] // セルと対応するindex番号のfeedDataをインスタンス化
         let url = URL(string:fD.link)
         if let url = url {
             let vc = SFSafariViewController(url: url)
             present(vc, animated: true, completion: nil)
         }
     }
-
+    
     // サイズ調整
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 170, height: 340)
     }
- 
+    
     // 長押しで出る吹き出しメニュー https://developer.apple.com/documentation/uikit/uicollectionviewdelegate/4002186-collectionview
     // iOS14から使用可能
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? { return UIContextMenuConfiguration(actionProvider: { suggestedActions in
         
         return UIMenu(children: [
-            // FIXME: -  お気に入りに追加 or すでに追加済みアラートを出すfuncを起動
-            UIAction(title: "Favorite") { _ in /* Implement the action. */ },
-            // FIXME: -  あとで読むに追加 or すでに追加済みアラートを出すfuncを起動
-            UIAction(title: "Read Later") { _ in /* Implement the action. */ }
-            ])
-        })
+            UIAction(title: "Read Later") { _ in
+                for indexPath in indexPaths {
+                    let fD = self.storedFeedDatas[indexPath.row]
+                    if !fD.isReadLater {
+                        self.storedFeedDatas[indexPath.row].isReadLater = true
+                    } else {
+                        self.storedFeedDatas[indexPath.row].isReadLater = false
+                    }
+                    self.rssListCollectionView.reloadItems(at: [indexPath])
+                }
+            },
+            UIAction(title: "Favorite") { _ in
+                for indexPath in indexPaths {
+                    let fD = self.storedFeedDatas[indexPath.row]
+                    if !fD.isFavorite {
+                        self.storedFeedDatas[indexPath.row].isFavorite = true
+                    } else {
+                        self.storedFeedDatas[indexPath.row].isFavorite = false
+                    }
+                    self.rssListCollectionView.reloadItems(at: [indexPath])
+                }
+            }
+        ])
+    })
     }
 }

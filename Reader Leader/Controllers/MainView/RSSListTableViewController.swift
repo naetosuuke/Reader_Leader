@@ -18,10 +18,8 @@ class RSSListTableViewController: UIViewController {
     @IBOutlet weak var moveToPreferenceButton: UIButton!
     
     // MARK: - Properties
-
-    var feedData: FeedData?
-    var feedDatas = [FeedData]()
-    var channelLinks = ["https://news.yahoo.co.jp/rss/topics/domestic.xml", "https://news.yahoo.co.jp/rss/topics/world.xml"] // UserDefaultからとってくる
+    private var storedFeedDatas = [FeedData]()
+    private var channelLinks = ["https://news.yahoo.co.jp/rss/topics/domestic.xml", "https://news.yahoo.co.jp/rss/topics/world.xml"] // UserDefaultからとってくる
     
     // MARK: - ViewInit
     override func viewDidLoad() {
@@ -34,15 +32,30 @@ class RSSListTableViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
         async {
             let fetchedFeedDatas = await RSSFeedParser().downloadAndParseXML(channelLinks: channelLinks)
-            self.feedDatas = fetchedFeedDatas
+            let checkedFeedDatas = RSSFeedHandler().checkDuplicationAndStoreDatas(fetchedFeedDatas: fetchedFeedDatas, storedFeedDatas: storedFeedDatas)
+            storedFeedDatas.append(contentsOf: checkedFeedDatas)
+            //ソートする
+            let category = UserDefaults.standard.string(forKey: "chosenCategoryForListView")!
+            if category != "All" {
+                var filteredFeedDatas: [FeedData] = []
+                for feedData in storedFeedDatas {
+                    switch category {
+                    case "Unread" : if !feedData.isRead {filteredFeedDatas.append(feedData)}
+                    case "Favorite" : if feedData.isFavorite {filteredFeedDatas.append(feedData)}
+                    case "Read Later" : if feedData.isReadLater {filteredFeedDatas.append(feedData)}
+                    default : if feedData.categoryID == category {filteredFeedDatas.append(feedData)}
+                    }
+                }
+                self.storedFeedDatas = filteredFeedDatas
+            }
             self.rssListTableView.reloadData()
         }
-        // TODO: お気に入りのみ表示する場合は、XMLの取得、パース手配が不要になる。UserDefaultからFeedDatasを呼び出す別メソッドを用意しなければならない
     }
-
+    
     // MARK: - Navigation
     // MARK: - Methods
     
@@ -62,27 +75,45 @@ class RSSListTableViewController: UIViewController {
         // ビューにグラデーションレイヤーを追加
         self.view.layer.insertSublayer(gradientLayer, at:0)
     }
-    
 }
 
 extension RSSListTableViewController: UITableViewDelegate, UITableViewDataSource{
-
+    
     // MARK: - UITableView Delegate, Datasource Method
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let cellCount = feedDatas.count
+        let cellCount = storedFeedDatas.count
         return cellCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルを取得する
         let cell = rssListTableView.dequeueReusableCell(withIdentifier: "CustomCellForRSSListTableView", for: indexPath) as! CustomCellForRSSListTableView
-        let fD = feedDatas[indexPath.row] // セルの
+        let fD = storedFeedDatas[indexPath.row] // セルの
         // TODO: - ここにソート用の分岐を作成する(お気に入り、未読、既読、各カテゴリによってfeedDataの取捨選択をする)
-
+        
         cell.articleLabel.text = fD.title
         cell.dataLabel.text = fD.pubDate
         cell.categoryLabel.text = fD.category
         cell.link = fD.link
+        
+        cell.flagLabel.text = ""
+        cell.isRead = fD.isRead
+        if !cell.isRead {
+            cell.flagLabel.text! += "🔵"
+        }
+        cell.isFavorite = fD.isFavorite
+        if cell.isFavorite {
+            cell.flagLabel.text! += "⭐️"
+        }
+        cell.isReadLater = fD.isReadLater
+        if cell.isReadLater {
+            cell.flagLabel.text! += "🔖"
+        }
+
         guard let img = UIImage(named: "yahoo") else { return cell } // FIXME: 対象のURLからHTMLソースを入手し、サムネイルが入った要素から画像データを抽出してimgに当てる (作業が重そうだったので今回はパス)
         cell.iconImageView.image = img
         cell.selectionStyle = UITableViewCell.SelectionStyle.none // セル選択時　グレーにならない
@@ -90,7 +121,9 @@ extension RSSListTableViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { // Segueを実行し、URLをWebViewControllerに渡す
-        let fD = feedDatas[indexPath.row] // セルと対応するindex番号のfeedDataをインスタンス化
+        self.storedFeedDatas[indexPath.row].isRead = true // 既読フラグつける
+        self.storedFeedDatas[indexPath.row].isReadLater = false // あとで読むフラグ解除
+        let fD = storedFeedDatas[indexPath.row] // セルと対応するindex番号のfeedDataをインスタンス化
         let url = URL(string:fD.link)
         if let url = url {
             let vc = SFSafariViewController(url: url)
@@ -99,33 +132,63 @@ extension RSSListTableViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let favoriteAction = UIContextualAction(style: .normal, title:" Fav") { (action, view, completionHandler) in     //　お気に入り、あとで読むボタンの実装　参照　https://qiita.com/JunichiHashimoto/items/5296d98b5e5a4bfbd6e3
-            print("tapped Favorite Action")
-            // TODO: - お気に入りに追加 or すでに追加済みアラートを出すfuncを起動
-            completionHandler(true) // 実行結果に関わらず記述
-          }
-        favoriteAction.backgroundColor = UIColor.systemYellow // 編集ボタンの色を変更
-        //favoriteAction.image = UIImage(named: "favorite") // アクションボタンに画像を設定
+        
         let readLaterAction = UIContextualAction(style: .normal, title:"Later") { (action, view, completionHandler) in
-            print("tapped ReadLater Action")
-            // FIXME: -  あとで読むに追加 or すでに追加済みアラートを出すfuncを起動
-          completionHandler(true) // 実行結果に関わらず記述
-          }
+            let fD = self.storedFeedDatas[indexPath.row]
+            if !fD.isReadLater {
+                self.storedFeedDatas[indexPath.row].isReadLater = true
+            } else {
+                self.storedFeedDatas[indexPath.row].isReadLater = false
+            }
+            self.rssListTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+            completionHandler(true) // 実行結果に関わらず記述
+        }
         readLaterAction.backgroundColor = UIColor.systemGreen // 編集ボタンの色を変更
         //readLaterAction.image = UIImage(named: "favorite")  // アクションボタンに画像を設定
-        return UISwipeActionsConfiguration(actions: [favoriteAction, readLaterAction])
+        
+        let favoriteAction = UIContextualAction(style: .normal, title:" Fav") { (action, view, completionHandler) in // https://qiita.com/JunichiHashimoto/items/5296d98b5e5a4bfbd6e3
+            let fD = self.storedFeedDatas[indexPath.row]
+            if !fD.isFavorite {
+                self.storedFeedDatas[indexPath.row].isFavorite = true
+            } else {
+                self.storedFeedDatas[indexPath.row].isFavorite = false
+            }
+            self.rssListTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+            completionHandler(true) // 実行結果に関わらず記述
+        }
+        favoriteAction.backgroundColor = UIColor.systemYellow // 編集ボタンの色を変更
+        //favoriteAction.image = UIImage(named: "favorite") // アクションボタンに画像を設定
+        
+        
+        return UISwipeActionsConfiguration(actions: [readLaterAction,favoriteAction])
     }
     
     //吹き出しメニュー
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? { return UIContextMenuConfiguration(actionProvider: { suggestedActions in
-            return UIMenu(children: [
-                // TODO: -  お気に入りに追加 or すでに追加済みアラートを出すfuncを起動
-                UIAction(title: "Favorite") { _ in /* Implement the action. */ },
-                // TODO: -  あとで読むに追加 or すでに追加済みアラートを出すfuncを起動
-                UIAction(title: "Read Later") { _ in /* Implement the action. */ }
-                ])
-            })
+        return UIMenu(children: [
+            // TODO: -  お気に入りに追加 or すでに追加済みアラートを出すfuncを起動
+            UIAction(title: "Read Later") { _ in
+                let fD = self.storedFeedDatas[indexPath.row]
+                if !fD.isReadLater {
+                    self.storedFeedDatas[indexPath.row].isReadLater = true
+                } else {
+                    self.storedFeedDatas[indexPath.row].isReadLater = false
+                }
+                self.rssListTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+            },
+            // TODO: -  あとで読むに追加 or すでに追加済みアラートを出すfuncを起動
+            UIAction(title: "Favorite") { _ in
+                let fD = self.storedFeedDatas[indexPath.row]
+                if !fD.isFavorite {
+                    self.storedFeedDatas[indexPath.row].isFavorite = true
+                } else {
+                    self.storedFeedDatas[indexPath.row].isFavorite = false
+                }
+                self.rssListTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+            }
+        ])
+    })
     }
-    
-    
 }
+
+

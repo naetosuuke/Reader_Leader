@@ -44,6 +44,7 @@ class PreferenceSubViewController: UIViewController {
         }
     }
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
     }
 
@@ -68,16 +69,21 @@ extension PreferenceSubViewController: UITableViewDelegate, UITableViewDataSourc
         guard let subPP = subPreferenceProperty else { return cell } // アンラップ
         cell.textLabel?.text = subPP[indexPath.row]
         cell.selectionStyle = UITableViewCell.SelectionStyle.none // セル選択時　グレーにならない
-        // TODO: - UserDefaultに選択された文字列と、セルのsubPreferencePropertyが一致していればaccessoryTypeを.checkmarkに設定する。
+        if cell.textLabel!.text == UserDefaults.standard.string(forKey: preferenceIdentifier!) { // UserDefaultに入っている値をチェックする
+            cell.accessoryType = .checkmark
+        }
         return cell
     }
     
     // セルが選択された時に呼び出される
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at:indexPath)
-        // チェックマークを入れる
-        cell?.accessoryType = .checkmark
-        // TODO: - UserDefaultに選択されたセルのsubPreferenceProperty文字列を登録
+
+        for cell in tableView.visibleCells { //見えるセルを全て.none型に変える　chatGPT実装
+            cell.accessoryType = .none
+        }
+        guard let cell = tableView.cellForRow(at:indexPath) else { return }
+        cell.accessoryType = .checkmark
+        UserDefaults.standard.set(cell.textLabel!.text, forKey: preferenceIdentifier!) // 設定をUserDefaultに保存
     }
     
     // セルの選択が外れた時に呼び出される
