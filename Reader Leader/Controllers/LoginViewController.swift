@@ -24,6 +24,14 @@ class LoginViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // TODO: モデルとして分離
+        if let darkMode = UserDefaults.standard.string(forKey: "DarkMode"){
+            switch darkMode {
+            case "light": self.overrideUserInterfaceStyle = .light
+            case "dark": self.overrideUserInterfaceStyle = .dark
+            default: print("dark theme ...match as devise setting")
+            }
+        }
         navigationController?.navigationBar.isHidden = true
     }
     
@@ -64,7 +72,7 @@ class LoginViewController: UIViewController {
         // FIXME: グラデーション　別のswiftファイルで定義
         let gradientLayer = CAGradientLayer()
         // グラデーションレイヤーの領域をviewと同じに設定
-        gradientLayer.frame = self.view.bounds // boundsでなくframeにするとNavigationBarが表示される
+        gradientLayer.frame = self.view.bounds // boundsでなくframeにするとNavigationBarが表示される　 // TODO: ダークテーマ用の配色、分岐を行う。
         // グラデーション開始色
         let topColor = UIColor(red: 140/255, green: 255/255, blue: 241/255, alpha: 1).cgColor
         // グラデーション終了色
@@ -76,5 +84,23 @@ class LoginViewController: UIViewController {
         // ビューにグラデーションレイヤーを追加
         self.view.layer.insertSublayer(gradientLayer, at:0)
     }
+    
+    
+    
+    @IBAction private func moveToListView(_ sender: Any) {
+        switch UserDefaults.standard.string(forKey: "ListType")! {
+        case "table style" :
+            self.performSegue(withIdentifier: "moveToTableView", sender: nil)
+        case "collection style" :
+            self.performSegue(withIdentifier: "moveToCollectionView", sender: nil)
+        default:
+            self.performSegue(withIdentifier: "moveToTableView", sender: nil)
+            print("ListType is not loaded from UserDefaults correctry")
+            print("ListType = ", UserDefaults.standard.string(forKey: "ListType")! )
+        }
+    }
+    
+    
+    
 }
 

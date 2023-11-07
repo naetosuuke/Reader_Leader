@@ -8,8 +8,9 @@
 import Foundation
 
 struct Preferences {
-    var rssListType = "List"
-    var rssReloadInterval = 30
+    //　UserDefaultのキーワードに該当するプロパティがnilだったら(初回起動時) これらのプロパティを付与する。
+    var rssListType = "table style"
+    var rssReloadInterval = "30 minutes"
     var characterSize = "mid"
-    var darkmode = false
+//    var darkmode = "light"
 }

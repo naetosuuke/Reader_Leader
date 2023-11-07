@@ -28,10 +28,10 @@ class PreferenceSubViewController: UIViewController {
         switch preferenceIdentifier {
         
         case "ListType":
-            subPreferenceProperty = ["collection", "list"]
+            subPreferenceProperty = ["table style", "collection style"]
             
         case "ReloadInterval":
-            subPreferenceProperty = ["30m", "60m", "120m"]
+            subPreferenceProperty = ["30 minutes", "1 hour", "2 hours"]
             
         case "CharacterSize":
             subPreferenceProperty = ["min", "mid", "max"]
@@ -45,6 +45,14 @@ class PreferenceSubViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // TODO: モデルとして分離
+        if let darkMode = UserDefaults.standard.string(forKey: "DarkMode"){
+            switch darkMode {
+            case "light": self.overrideUserInterfaceStyle = .light
+            case "dark": self.overrideUserInterfaceStyle = .dark
+            default: print("dark theme ...match as devise setting")
+            }
+        }
         navigationController?.navigationBar.isHidden = false
     }
 
@@ -84,6 +92,15 @@ extension PreferenceSubViewController: UITableViewDelegate, UITableViewDataSourc
         guard let cell = tableView.cellForRow(at:indexPath) else { return }
         cell.accessoryType = .checkmark
         UserDefaults.standard.set(cell.textLabel!.text, forKey: preferenceIdentifier!) // 設定をUserDefaultに保存
+        
+        if preferenceIdentifier == "DarkMode"{
+            switch cell.textLabel!.text {
+            case "light": self.overrideUserInterfaceStyle = .light
+            case "dark": self.overrideUserInterfaceStyle = .dark
+            default: self.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle // デバイス側のUserinterfaceStyleを割り当て　ChatGPT実装
+            }
+        }
+        
     }
     
     // セルの選択が外れた時に呼び出される

@@ -19,6 +19,7 @@ class PreferenceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Preference"
+        navigationController?.delegate = self
         preferenceTableView.delegate = self
         preferenceTableView.dataSource = self
         preferenceTableView.isScrollEnabled = false // スクロール禁止
@@ -27,6 +28,14 @@ class PreferenceViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // TODO: モデルとして分離
+        if let darkMode = UserDefaults.standard.string(forKey: "DarkMode"){
+            switch darkMode {
+            case "light": self.overrideUserInterfaceStyle = .light
+            case "dark": self.overrideUserInterfaceStyle = .dark
+            default: print("dark theme ...match as devise setting")
+            }
+        }
         navigationController?.navigationBar.isHidden = false
     }
 
@@ -64,11 +73,13 @@ extension PreferenceViewController: UITableViewDelegate, UITableViewDataSource{
         case 0: // RSS List Type
             let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "PreferenceSubViewController") as! PreferenceSubViewController
             nextVC.preferenceIdentifier = "ListType"
+            nextVC.navigationItem.title = "ListType"
             self.navigationController?.pushViewController(nextVC, animated: true)
             
         case 1: // RSS Reload Interval
             let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "PreferenceSubViewController") as! PreferenceSubViewController
             nextVC.preferenceIdentifier = "ReloadInterval"
+            nextVC.navigationItem.title = "ReloadInterval"
             self.navigationController?.pushViewController(nextVC, animated: true)
             
         case 2: // RSS Feed Management
@@ -79,18 +90,21 @@ extension PreferenceViewController: UITableViewDelegate, UITableViewDataSource{
         
             let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "PreferenceSubViewController") as! PreferenceSubViewController
             nextVC.preferenceIdentifier = "CharacterSize"
+            nextVC.navigationItem.title = "CharacterSize"
             self.navigationController?.pushViewController(nextVC, animated: true)
 
         case 4: // Dark Mode
             let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "PreferenceSubViewController") as! PreferenceSubViewController
             nextVC.preferenceIdentifier = "DarkMode"
+            nextVC.navigationItem.title = "DarkMode"
             self.navigationController?.pushViewController(nextVC, animated: true)
             
         case 5: // Log Out
             let alert = UIAlertController(title: "Log Out and Back to Log In Page", message: "Please Confirm again..", preferredStyle: .actionSheet)
             let ok = UIAlertAction(title: "OK", style: .default) { (action) in
                 self.dismiss(animated: true, completion: nil)
-                self.navigationController?.popToRootViewController(animated: true) // NavigationControllerの最初の画面へ移動
+                let newViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController //インスタンスはstoryboard.instantiateViewControllerを使うこと(クラスをそのままインスタンス化してもstoryboardの内容は反映されない)
+                self.navigationController!.setViewControllers([newViewController], animated: true) //既存のNavigationController上のVCを破棄し、新しいスタックを作る
             }
             let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (acrion) in
                 self.dismiss(animated: true, completion: nil)
@@ -106,5 +120,31 @@ extension PreferenceViewController: UITableViewDelegate, UITableViewDataSource{
         
     }
     
+}
+
+extension PreferenceViewController: UINavigationControllerDelegate {
+    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if viewController == self {
+            // カスタムのバックボタンを作成
+            let backButton = UIBarButtonItem(title: "<Back", style: .plain, target: self, action: #selector(showNewView))
+            navigationItem.leftBarButtonItem = backButton
+        }
+    }
+    
+    @objc func showNewView() { //ChatGPTによる実装
+        switch UserDefaults.standard.string(forKey: "ListType")! {
+        case "table style":
+            let newViewController = storyboard?.instantiateViewController(withIdentifier: "RSSListTableViewController") as! RSSListTableViewController // https://qiita.com/cfiken/items/00378814e7437216bb10, https://uchinoinu.hatenablog.jp/entry/2016/07/13/114846 //インスタンスはstoryboard.instantiateViewControllerを使うこと(クラスをそのままインスタンス化してもstoryboardの内容は反映されない)
+            navigationController!.setViewControllers([newViewController], animated: true)
+        case "collection style":
+            let newViewController = storyboard?.instantiateViewController(withIdentifier: "RSSCollectionViewController") as! RSSCollectionViewController
+            navigationController!.setViewControllers([newViewController], animated: true)
+        default:
+            return
+        }
+        
+
+    }
 }
 

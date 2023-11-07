@@ -34,7 +34,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="Reader_Leader" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="Reader_Leader" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -114,7 +114,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Log In"/>
                                 <connections>
-                                    <segue destination="TGb-go-j9F" kind="show" id="oVy-WT-U0K"/>
+                                    <action selector="moveToListView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fAl-SW-agM"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="227-01-DPB">
@@ -165,11 +165,13 @@
                         <outlet property="loginButton" destination="Pt8-Vq-BPO" id="mkw-eM-E4G"/>
                         <outlet property="passwordInputField" destination="pgl-KF-mY5" id="Yrm-pK-ap5"/>
                         <outlet property="signUpButton" destination="227-01-DPB" id="zqS-x6-ed8"/>
+                        <segue destination="TGb-go-j9F" kind="show" identifier="moveToTableView" id="fLn-gi-yXa"/>
+                        <segue destination="M9A-jr-yt7" kind="show" identifier="moveToCollectionView" id="Nxp-to-rCv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1696.9465648854962" y="-58.450704225352112"/>
+            <point key="canvasLocation" x="1696.2616822429904" y="-58.963282937365015"/>
         </scene>
         <!--SelectRSS Channel View Controller-->
         <scene sceneID="F3M-BR-5sQ">
@@ -206,7 +208,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Launch RSS List"/>
                                 <connections>
-                                    <segue destination="TGb-go-j9F" kind="show" id="6ob-bG-Pig"/>
+                                    <action selector="moveToListView:" destination="lKo-Sf-mJy" eventType="touchUpInside" id="aWa-rG-Sgc"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It's time to be a reader leader!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tah-dg-kbW">
@@ -254,6 +256,8 @@
                         <outlet property="label" destination="ELw-1c-WDP" id="2vr-Ex-lg0"/>
                         <outlet property="launchRSSListButton" destination="Nzq-e9-cK3" id="dS4-o3-rPi"/>
                         <outlet property="selectRSSTableView" destination="FQM-q1-bgO" id="HQs-DZ-KZN"/>
+                        <segue destination="TGb-go-j9F" kind="show" identifier="moveToTableView_AfterRegistration" id="bQW-fk-juA"/>
+                        <segue destination="M9A-jr-yt7" kind="show" identifier="moveToCollectionView_AfterRegistration" id="Ler-oG-iir"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4t8-Jw-pp1" sceneMemberID="firstResponder"/>
@@ -263,7 +267,7 @@
         <!--List Table View Controller-->
         <scene sceneID="kXA-is-lw8">
             <objects>
-                <viewController id="TGb-go-j9F" customClass="RSSListTableViewController" customModule="Reader_Leader" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RSSListTableViewController" id="TGb-go-j9F" customClass="RSSListTableViewController" customModule="Reader_Leader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MbR-kL-VIw">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -305,15 +309,6 @@
                                 <rect key="frame" x="0.0" y="118" width="428" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2B0-G5-Qb1">
-                                <rect key="frame" x="214" y="101" width="98" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="collection"/>
-                                <connections>
-                                    <segue destination="M9A-jr-yt7" kind="show" id="Wa1-F8-yJI"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XWf-18-4iA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -450,12 +445,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZQv-OR-U39" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1662" y="1525"/>
+            <point key="canvasLocation" x="1661" y="1424"/>
         </scene>
         <!--Collection View Controller-->
         <scene sceneID="PZW-aB-XOY">
             <objects>
-                <viewController id="M9A-jr-yt7" customClass="RSSCollectionViewController" customModule="Reader_Leader" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RSSCollectionViewController" id="M9A-jr-yt7" customClass="RSSCollectionViewController" customModule="Reader_Leader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cv2-on-yPm">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -504,15 +499,6 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wU2-97-g5L">
-                                <rect key="frame" x="248" y="84" width="52" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="List"/>
-                                <connections>
-                                    <action selector="backToTableView:" destination="M9A-jr-yt7" eventType="touchUpInside" id="qR2-fT-4Fq"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4pq-m7-rnA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -583,7 +569,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sMQ-5n-TyJ" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="852.3364485981308" y="1524.6220302375812"/>
+            <point key="canvasLocation" x="844" y="1424"/>
         </scene>
         <!--ManageRSS Channel View Controller-->
         <scene sceneID="x8t-DE-hZc">
@@ -618,9 +604,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Yla-52-2l2"/>
-        <segue reference="J6x-zH-qUz"/>
-        <segue reference="6ob-bG-Pig"/>
+        <segue reference="Nxp-to-rCv"/>
+        <segue reference="ski-sy-Bup"/>
+        <segue reference="OAI-5D-0uX"/>
+        <segue reference="fLn-gi-yXa"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="gearshape" catalog="system" width="128" height="123"/>

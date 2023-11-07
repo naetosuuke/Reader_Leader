@@ -110,8 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				50A7C9EB2AD042D100BB3B9B /* CustomCellForRSSListTableView.xib */,
-				506EC0252AD04F3100AF08C5 /* CustomCellForSelectRSSTableView.xib */,
 				50F192AF2AD0422000999CDC /* CustomCellForRSSListCollectionView.xib */,
+				506EC0252AD04F3100AF08C5 /* CustomCellForSelectRSSTableView.xib */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";

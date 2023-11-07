@@ -21,8 +21,8 @@ class CustomCellForRSSListCollectionView: UICollectionViewCell {
     var isReadLater = false
     var isFavorite = false
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
+    override func prepareForReuse() { //セルの再利用時に読み込む初期化内容
+        super.prepareForReuse() // ここで初期化しておくことで、セルをIndexRowAtで指定してラベルや色を変えたときに再利用起因で起きるバグを回避できる
         flagLabel.text = ""
     }
 }

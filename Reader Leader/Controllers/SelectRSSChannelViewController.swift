@@ -32,6 +32,14 @@ class SelectRSSChannelViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // TODO: モデルとして分離
+        if let darkMode = UserDefaults.standard.string(forKey: "DarkMode"){
+            switch darkMode {
+            case "light": self.overrideUserInterfaceStyle = .light
+            case "dark": self.overrideUserInterfaceStyle = .dark
+            default: print("dark theme ...match as devise setting")
+            }
+        }
         navigationController?.navigationBar.isHidden = true
     }
     
@@ -58,6 +66,23 @@ class SelectRSSChannelViewController: UIViewController{
         gradientLayer.endPoint = CGPoint.init(x: 1, y: 1)
         // ビューにグラデーションレイヤーを追加
         self.view.layer.insertSublayer(gradientLayer, at:0)
+    }
+    
+    
+    
+    
+    @IBAction func moveToListView(_ sender: Any) {
+        print(UserDefaults.standard.string(forKey: "ListType")! )
+        switch UserDefaults.standard.string(forKey: "ListType") {
+        case "table style" :
+            self.performSegue(withIdentifier: "moveToTableView_AfterRegistration", sender: nil)
+        case "collection style" :
+            self.performSegue(withIdentifier: "moveToCollectionView_AfterRegistration", sender: nil)
+        default:
+            self.performSegue(withIdentifier: "moveToTableView", sender: nil)
+            print("ListType is not loaded from UserDefaults correctry")
+            print("ListType = ", UserDefaults.standard.string(forKey: "ListType")! )
+        }
     }
 }
 

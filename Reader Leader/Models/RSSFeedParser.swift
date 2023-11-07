@@ -18,6 +18,37 @@ class RSSFeedParser: NSObject, XMLParserDelegate { // Parserをイニシャラ�
     
     // MARK: - Methods
     func downloadAndParseXML(channelLinks: [String]) async -> [FeedData] {  // MARK: chatGPTによるリファクタ VC上でGroupDispatchを使って非同期処理を行なっていたが、async/awaitを使って書き換え
+        
+        let currentTime = Date() //現在の時間
+        if let lUT = UserDefaults.standard.object(forKey: "lastUpdateTime") as? Date { //最終更新時間 nil(空)ならこのまま更新
+            let timeInterval = currentTime.timeIntervalSince(lUT) //Date型の比較ができるメソッド　chatGPTで生成
+            if let reloadInterval = UserDefaults.standard.string(forKey: "ReloadInterval"){ // 任意の更新時間から30分経過したか
+                switch reloadInterval {
+                case "30 minutes":
+                    let isOver30Minutes = timeInterval > 30 * 60 // 30分は秒で1800秒
+                    if !isOver30Minutes {
+                        print("it has not been passed over 30min yet")
+                        //return [] // 取得データの永続化ができるまでは、一旦解除(そうじゃないと全く記事見れない)
+                    }
+                case "1 hour":
+                    let isOver1hour = timeInterval > 60 * 60 // 30分は秒で1800秒
+                    if !isOver1hour {
+                        print("it has not been passed over 1hour yet")
+                        //return [] // 取得データの永続化ができるまでは、一旦解除(そうじゃないと全く記事見れない)
+                    }
+                case "2 hours":
+                    let isOver2hours = timeInterval > 120 * 60 // 30分は秒で1800秒
+                    if !isOver2hours {
+                        print("it has not been passed over 2hours yet")
+                        //return [] // 取得データの永続化ができるまでは、一旦解除(そうじゃないと全く記事見れない)
+                    }
+                default:
+                    print("ReloadInterval has unexpected value")
+                    print(reloadInterval)
+                }
+            }
+        }
+            
         var fetchedFeedDatas: [FeedData] = []
         for channelLink in channelLinks {
             guard let cL = URL(string: channelLink) else {
@@ -30,6 +61,7 @@ class RSSFeedParser: NSObject, XMLParserDelegate { // Parserをイニシャラ�
                 parser.delegate = self
                 parser.parse()
                 fetchedFeedDatas.append(contentsOf: self.feedDatas)
+                UserDefaults.standard.setValue(currentTime, forKey: "lastUpdateTime") // MARK: RSSフィードの取得に失敗した際は、最終更新の記録から除外したほうがいい。なのでlastUpdateTimeはここで更新
             } catch {
                 print("Failed to fetch data for URL: \(channelLink)")
             }

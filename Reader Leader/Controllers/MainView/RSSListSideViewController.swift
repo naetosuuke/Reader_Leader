@@ -26,13 +26,23 @@ class RSSListSideViewController: UIViewController {
         sortTableView.delegate = self
         sortTableView.dataSource = self
         sortTableView.allowsMultipleSelection = false //　複数チェックを無効
-
+        // TODO: ダークテーマ用の配色、分岐を行う。
+        
     }
     
     override func viewWillAppear(_ animated: Bool) { 
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
+        // TODO: モデルとして分離
+        if let darkMode = UserDefaults.standard.string(forKey: "DarkMode"){
+            switch darkMode {
+            case "light": self.overrideUserInterfaceStyle = .light
+            case "dark": self.overrideUserInterfaceStyle = .dark
+            default: print("dark theme ...match as devise setting")
+            }
+        }
     }
+    
 }
 
 

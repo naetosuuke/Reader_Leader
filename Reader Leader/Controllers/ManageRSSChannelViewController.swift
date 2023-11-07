@@ -25,7 +25,6 @@ class ManageRSSChannelViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.title = "RSS Feed Management"
         navigationItem.rightBarButtonItem = editButtonItem
-        
         //配列ダミーデータ　あとでmodelから引っ張るよう書き換え
         channels = RSSChannelResource().rssChannelResource
         subscribedChannels = ["topPick", "domestics", "world", "business", "entertainment"]
@@ -41,6 +40,18 @@ class ManageRSSChannelViewController: UIViewController {
         manageChannelsTableView.dataSource = self
         manageChannelsTableView.register(nib, forCellReuseIdentifier: "CustomCellForSelectRSSTableView")
         manageChannelsTableView.allowsSelectionDuringEditing = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // TODO: モデルとして分離
+        if let darkMode = UserDefaults.standard.string(forKey: "DarkMode"){
+            switch darkMode {
+            case "light": self.overrideUserInterfaceStyle = .light
+            case "dark": self.overrideUserInterfaceStyle = .dark
+            default: print("dark theme ...match as devise setting")
+            }
+        }
     }
     
     // MARK: - Methods

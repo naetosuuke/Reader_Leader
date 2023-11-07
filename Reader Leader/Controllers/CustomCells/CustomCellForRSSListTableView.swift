@@ -24,9 +24,10 @@ class CustomCellForRSSListTableView: UITableViewCell {
     var isFavorite = false
     
     // MARK: - ViewInit
-    override func awakeFromNib() { //  awakeFromNibは初回読み込み時しか呼び出されないので、reloadViewでは反映されない。 https://stackoverflow.com/questions/56042220/awakefromnimb-doesnt-get-called-on-tableview-reloaddata-swift
-        super.awakeFromNib()
+    override func prepareForReuse() { //セルの再利用時に読み込む初期化内容
+        super.prepareForReuse() // ここで初期化しておくことで、セルをIndexRowAtで指定してラベルや色を変えたときに再利用起因で起きるバグを回避できる
         flagLabel.text = ""
+        backgroundColor = .systemBackground
     }
     
 
